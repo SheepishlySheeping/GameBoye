@@ -1,0 +1,188 @@
+@font-face {
+  font-family: 'Minecraft';
+  src: url('/src/assets/fonts/Minecraft.ttf') format('truetype');
+}
+
+button {
+  all: unset;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+}
+
+button:hover {
+  cursor: url('/src/assets/imgs/cursorclickPNG.png') 6 0, auto;
+}
+
+p {
+  margin: 0;
+}
+
+.App {
+  background: linear-gradient(to bottom, rgba(0, 0, 139) 95%, rgba(0, 0, 50)), 
+              linear-gradient(to top, rgba(0, 0, 139) 95%, rgba(0, 0, 50));
+  background-blend-mode: color;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  cursor: url('/src/assets/imgs/cursorPNG.png') 1 0, auto;
+}
+
+.BarTop, .Bar {
+  width: 100%;
+  height: 7.5%;
+  display: flex;
+}
+
+.BarTop {
+  align-items: center;
+}
+
+.Bar {
+  justify-content: center;
+}
+
+.SideBar, .SideBarToo {
+  width: 2.5%;
+  height: 85%;
+  position: absolute;
+  background-color: darkblue;
+  z-index: 2;
+}
+
+.SideBar {
+  left: 0;
+}
+
+.SideBarToo {
+  right: 0;
+}
+
+.IOSwitch {
+  width: 10%;
+  height: 50%;
+  background-color: slategray;
+  border-radius: 15%;
+  border: 0.5vh solid black;
+  margin-left: 3%;
+}
+
+.IOSwitchBar {
+  width: 80%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.IOSwitchBar div {
+  height: 80%;
+  width: 15%;
+  background-color: darkgray;
+  border-radius: 15%;
+}
+
+.IOSwitchBar p {
+  margin: 0% 15%;
+  font: bold;
+  color: silver;
+}
+
+.ExitButton {
+  position: absolute;
+  width: 3vw;
+  height: 3vw;
+  background-color: red;
+  right: 0;
+  top: 0;
+  margin: 1%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.Popup {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Box {
+  width: 95%;
+  height: 85%;
+  background-color: rgb(100, 100, 255);
+  border-radius: 10%;
+  display: flex;
+  position: relative;
+  justify-self: center;
+  font-family: 'Minecraft', sans-serif;
+}
+
+.screenOff {
+  background-color: black !important;
+}
+
+#pixelOverlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10%;
+  top: 0;
+  background: linear-gradient(to right, rgba(80, 80, 255, 0) 60%, rgba(80, 80, 255, 1) 95%), 
+              linear-gradient(to left, rgba(80, 80, 255, 0) 60%, rgba(80, 80, 255, 1) 95%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+#menuTitleHolder {
+  width: 100%;
+  padding-top: 2.5%;
+  font-size: 2em;
+  text-align: center;
+}
+
+#menuSlidesHolder {
+  position: absolute;
+  top: 20%;
+  left: 32.33vw;
+  width: 100%;
+  height: 60%;
+  white-space: nowrap;
+}
+
+#menuSlideChangerHolder {
+  position: absolute;
+  top: 20%;
+  width: 100%;
+  height: 60%;
+  padding-top: 5.5%;
+  display: flex;
+  justify-content: center;
+}
+
+.menuSlideChanger {
+  z-index: 2;
+  opacity: 0;
+  width: 15vw;
+  height: 15vw;
+}
+
+#clickSlide {
+  width: 25vw;
+  height: 25vw;
+  margin: 0 3vw;
+}
+
+#menuSlides {
+  width: 100%;
+  height: 100%;
+}
