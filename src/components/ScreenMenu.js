@@ -66,10 +66,10 @@ const ScreenMenu = () => {
                         <p style={{ width: "100%", height: "15%", display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.5em' }}>Controls</p>
                         <img src={cursorPNG} style={{ width: "50%", height: "30%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }}></img>
                         <img src={cursorclickPNG} style={{ width: "50%", height: "30%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }}></img>
-                        <p style={{ width: "45%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Normal</p>
-                        <p style={{ width: "55%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Interactable</p>
+                        <p style={{ width: "45%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Normal</p>
+                        <p style={{ width: "55%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Interactable</p>
                         <div style={{ width: "80%", height: "1.5%", backgroundColor: 'black', margin: '0 10%' }}></div>
-                        <p style={{ width: "90%", height: "45.5%", margin: '1.5% 5%' }}>My first project!!!<br/>hello sad</p>
+                        <p style={{ width: "90%", height: "44.5%", margin: '2% 5%' }}>Created by Sheep<br/><br/>as</p>
                     </>
                 } />}
             </AnimatePresence>
@@ -81,7 +81,7 @@ const ScreenMenu = () => {
             </div>
             <motion.div id="menuSlidesHolder" initial={{ x: `-${currentSlide * 31}vw` }} animate={{ x: `-${currentSlide * 31}vw` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
                 <div id="menuSlides">{slides.map(((slide, index) =>
-                    <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={{ scale: currentSlide === index ? 1 : 0.5 }} transition={{ duration: 0.5, ease: 'easeInOut' }} id="clickSlide" style={{ backgroundImage: `url(${slide.icon})`, backgroundSize: 'cover', backgroundColor: 'cyan', backgroundBlendMode: 'multiply' }}></motion.button>
+                    <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={{ scale: currentSlide === index ? 1 : currentSlide === index + 1 ? 0.5 : currentSlide === index - 1 ? 0.5 : 0, opacity: currentSlide === index ? 1 : currentSlide === index + 1 ? 0.3 : currentSlide === index - 1 ? 0.3 : 0 }} transition={{ duration: 0.5, ease: 'easeInOut' }} id="clickSlide" style={{ backgroundImage: `url(${slide.icon})`, backgroundSize: 'cover', backgroundColor: 'cyan', backgroundBlendMode: 'multiply' }}></motion.button>
                 ))}</div>
             </motion.div>
         </>

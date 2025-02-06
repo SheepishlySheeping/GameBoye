@@ -48,12 +48,10 @@ function App() {
         </div>
       </div>
 
-      <div className="SideBar"></div>
-      <div className="SideBarToo"></div>
+
 
       <div className={`Box ${gameState === "gameOff" ? "screenOff" : ""}`}>
         {gameState === "gameMenu" && <ScreenMenu />}
-        {gameState !== "gameOff" && <div id="pixelOverlay"></div>}
       </div>
 
       <div className="Bar">
