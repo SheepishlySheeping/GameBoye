@@ -2,22 +2,24 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import './assets/styles/App.css';
 import ScreenMenu from './components/ScreenMenu';
+import ScreenEffect from './components/ScreenEffects'
 
 function App() {
 
   // Constructors
   const [gameState, setGameState] = useState("gameOff");
+  const [screenEffect, setScreenEffect] = useState({ state: "Off", duration: "0" });
 
   const SwitchAnimate = {
-    off: { 
+    off: {
       x: "0%",
       transition: {
         duration: 0.2,
         ease: 'easeInOut',
       },
     },
-    on: { 
-      x: "25%", 
+    on: {
+      x: "25%",
       transition: {
         duration: 0.2,
         ease: 'easeInOut',
@@ -31,7 +33,7 @@ function App() {
       <div className="BarTop">
         <div className="IOSwitch">
           <AnimatePresence mode="wait">
-            <motion.button 
+            <motion.button
               className="IOSwitchBar"
               onClick={() => setGameState(gameState === "gameOff" ? "gameMenu" : "gameOff")}
               key={gameState}
@@ -51,7 +53,8 @@ function App() {
 
 
       <div className={`Box ${gameState === "gameOff" ? "screenOff" : ""}`}>
-        {gameState === "gameMenu" && <ScreenMenu />}
+        <ScreenEffect variant={screenEffect.state} duration={screenEffect.duration} manageEffects={setScreenEffect}></ScreenEffect>
+        {gameState === "gameMenu" && <ScreenMenu manageEffects={setScreenEffect} />}
       </div>
 
       <div className="Bar">

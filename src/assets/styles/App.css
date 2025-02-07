@@ -108,26 +108,49 @@ p {
 .Box {
   width: 95%;
   height: 85%;
+  margin: 0 2.5%;
   background-color: rgb(100, 100, 255);
+  background-size: cover;
   border-radius: 10%;
   display: flex;
   position: relative;
-  justify-self: center;
   font-family: 'Minecraft', sans-serif;
   overflow: hidden;
 }
 
+.Box::before {
+  z-index: 10;
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient( ellipse at center, rgba(255, 255, 255, 0) 15%, rgb(255, 255, 255, 0.15));
+}
+
+.animatedBackground {
+  animation: animateBackground 5s linear infinite;
+  z-index: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+  linear-gradient(90deg, rgba(0, 255, 255, 0.15) 5%, transparent 1%),
+  linear-gradient(0deg, rgba(0, 255, 255, 0.15) 5%, transparent 1%);
+  background-size: 5% 11%;
+}
+
+@keyframes animateBackground {
+  0% { background-position: 0 0; }
+  100% { background-position: 5.3% 12% }
+}
+
 .screenOff {
   background-color: black !important;
-  background-image: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.05) 50%, 
-    rgba(0, 0, 0, 0) 100%
-  ) !important;
 }
 
 #menuTitleHolder {
+  animation: distort 3s linear infinite; 
   width: 100%;
   padding-top: 2.5%;
   font-size: 2em;
@@ -164,9 +187,25 @@ p {
   width: 25vw;
   height: 25vw;
   margin: 0 3vw;
+  background-size: cover;
+  background-image: radial-gradient( circle, rgba(0, 255, 255) 30%, rgb(0, 190, 255));
+  background-blend-mode: multiply;
+}
+
+#clickSlide div {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
 }
 
 #menuSlides {
   width: 100%;
   height: 100%;
+}
+
+.PopupContent {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  background-image: radial-gradient( circle, rgba(0, 255, 255) 30%, rgb(0, 190, 255));
 }
