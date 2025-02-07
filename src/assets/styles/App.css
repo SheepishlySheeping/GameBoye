@@ -146,7 +146,11 @@ p {
 }
 
 .screenOff {
-  background-color: black !important;
+  z-index: 9;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
 }
 
 #menuTitleHolder {

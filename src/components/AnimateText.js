@@ -1,11 +1,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { tr } from "framer-motion/client";
 
-const AnimateText = ({ text }) => {
-
-  // Constructors 
-  const textContainer = {
+const textContainer = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -21,7 +17,7 @@ const AnimateText = ({ text }) => {
     visible: { opacity: 1 },
   };
 
-  // Display
+const AnimateText = ({ text }) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div

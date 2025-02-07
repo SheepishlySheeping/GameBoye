@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import '../assets/styles/App.css';
 import { animate, AnimatePresence, color, motion } from 'framer-motion';
 
-const PopupScreen = ({ variant, content }) => {
-
-    // Constructors
     const popupContainer = {
         hidden: {
             opacity: 0,
@@ -23,8 +20,8 @@ const PopupScreen = ({ variant, content }) => {
             },
         }
     }
-    // Functions
-    // Display
+
+const PopupScreen = ({ variant, content }) => {
     return (
         <motion.div variants={popupContainer} initial="hidden" animate="visible" exit="hidden" className="Popup">
             <div className="PopupContent" style={{ width: variant === "large" ? "50%" : "30%", height: variant === "large" ? "70%" : "50%" }}>

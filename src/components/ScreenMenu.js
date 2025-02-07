@@ -10,24 +10,30 @@ import infoPNG from '../assets/imgs/infoPNG.png'
 import tictactoePNG from '../assets/imgs/tictactoePNG.png'
 import tetrisPNG from '../assets/imgs/tetrisPNG.png'
 
+const slides = [
+    { id: 1, title: "Settings", icon: settingsPNG },
+    { id: 2, title: "Info", icon: infoPNG },
+    { id: 3, title: "TicTacToe", icon: tictactoePNG },
+    { id: 4, title: "Tetris", icon: tetrisPNG },
+    { id: 5, title: "temp" },
+    { id: 6, title: "temp" },
+]
+
+
+
 const ScreenMenu = ({ manageEffects }) => {
 
-    // Constructors
-    const slides = [
-        { id: 1, title: "Settings", icon: settingsPNG },
-        { id: 2, title: "Info", icon: infoPNG },
-        { id: 3, title: "TicTacToe", icon: tictactoePNG },
-        { id: 4, title: "Tetris", icon: tetrisPNG },
-        { id: 5, title: "temp" },
-        { id: 6, title: "temp" },
-    ]
     const [currentSlide, setCurrentSlide] = useState(1);
     const [infoShow, setInfoShow] = useState(false);
     const [settingsShow, setSettingsShow] = useState(false);
     const [clickDisabledPrev, setClickDisabledPrev] = useState(false);
     const [clickDisabledNext, setClickDisabledNext] = useState(false);
 
-    // Functions
+    const buttonAnimation = (index) => ({
+        scale: currentSlide === index ? 1 : (currentSlide === index + 1 || currentSlide === index - 1) ? 0.5 : 0,
+        opacity: currentSlide === index ? 1 : (currentSlide === index + 1 || currentSlide === index - 1) ? 0.3 : 0
+    });
+
     const changeSlide = (direction) => {
         let newSlide = currentSlide;
         if (direction === "prev") {
@@ -61,7 +67,6 @@ const ScreenMenu = ({ manageEffects }) => {
         menuPopup[id]?.();
     }
 
-    // Display
     return (
         <>
             <div className="animatedBackground" style={{ width: "100%", height: "100%" }}> </div>
@@ -84,8 +89,8 @@ const ScreenMenu = ({ manageEffects }) => {
                     {settingsShow === true && <PopupScreen variant={"large"} content={
                         <>
                             <button onClick={() => setSettingsShow(false)} className="ExitButton">X</button>
-                            <button style={{ width: "20%", height: "20%", margin: "5% 5%"}} onClick={() => manageEffects({state: "HorizontalGlitch", duration: "3000"})}>Glitch me</button>
-                            <button style={{ width: "20%", height: "20%", margin: "5% 5%"}} onClick={() => manageEffects({state: "Loading", duration: "5000"})}>Load me</button>
+                            <button style={{ width: "20%", height: "20%", margin: "5% 5%" }} onClick={() => manageEffects({ state: "HorizontalGlitch", duration: "3000" })}>Glitch me</button>
+                            <button style={{ width: "20%", height: "20%", margin: "5% 5%" }} onClick={() => manageEffects({ state: "Loading", duration: "350" })}>Load me</button>
                         </>
                     } />}
                 </AnimatePresence>
@@ -97,7 +102,7 @@ const ScreenMenu = ({ manageEffects }) => {
                 </div>
                 <motion.div id="menuSlidesHolder" initial={{ x: `-${currentSlide * 31}vw` }} animate={{ x: `-${currentSlide * 31}vw` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
                     <div id="menuSlides">{slides.map(((slide, index) =>
-                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={{ scale: currentSlide === index ? 1 : currentSlide === index + 1 ? 0.5 : currentSlide === index - 1 ? 0.5 : 0, opacity: currentSlide === index ? 1 : currentSlide === index + 1 ? 0.3 : currentSlide === index - 1 ? 0.3 : 0 }} transition={{ duration: 0.5, ease: 'easeInOut' }} id="clickSlide" ><div style={{ backgroundImage: `url(${slide.icon})` }} ></div></motion.button>
+                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }}  id="clickSlide" ><div style={{ backgroundImage: `url(${slide.icon})` }} ></div></motion.button>
                     ))}</div>
                 </motion.div>
             </div>
