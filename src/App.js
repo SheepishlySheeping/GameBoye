@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import './assets/styles/App.css';
+import VisualEffects from './components/VisualEffects';
 import ScreenMenu from './components/ScreenMenu';
-import ScreenEffect from './components/ScreenEffects'
+import ScreenBootUp from './components/ScreenBootUp'
 
 const SwitchAnimate = {
   off: {
@@ -24,7 +25,7 @@ const SwitchAnimate = {
 function App() {
 
   const [gameState, setGameState] = useState("gameOff");
-  const [screenEffect, setScreenEffect] = useState({ state: "Off", duration: "0" });
+  const [visualEffect, setVisualEffect] = useState({ state: "Off", duration: "0" });
 
   return (
     <div className="App">
@@ -34,8 +35,8 @@ function App() {
             <motion.button
               className="IOSwitchBar"
               onClick={() => {
-                setGameState(gameState === "gameOff" ? "gameMenu" : "gameOff");
-                setScreenEffect({ state: "Off", duration: "0" })
+                setGameState(gameState === "gameOff" ? "gameBootUp" : "gameOff");
+                setVisualEffect({ state: "HorizontalGlitch", duration: "0" })
               }}
               key={gameState}
               variants={SwitchAnimate}
@@ -50,14 +51,12 @@ function App() {
         </div>
       </div>
 
-      <div className="Box">
-        <div className="screenOff" style={{ display: gameState === "gameOff" ? "block" : "none"}}></div>
-        <AnimatePresence mode="">
-          {screenEffect.state != "Off" && (
-            <ScreenEffect variant={screenEffect.state} duration={screenEffect.duration} manageEffects={setScreenEffect} />)}
+      <div className="Box" style={{backgroundColor: gameState === "gameOff" ? "black" : gameState === "gameBootUp" ? "rgba(15, 15, 15)" : "rgba(100, 100, 255)"}}>
+        <AnimatePresence mode="wait">
+          {visualEffect.state != "Off" && <VisualEffects variant={visualEffect.state} duration={visualEffect.duration} setVisualEffect={setVisualEffect} />}
         </AnimatePresence>
-        {gameState === "gameMenu" && <ScreenMenu manageEffects={setScreenEffect} />}
-
+        {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
+        {gameState === "gameMenu" && <ScreenMenu setVisualEffect={setVisualEffect} />}
       </div>
 
       <div className="Bar">

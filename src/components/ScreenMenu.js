@@ -2,7 +2,7 @@ import React, { use, useState } from "react";
 import '../assets/styles/App.css';
 import { AnimatePresence, motion } from 'framer-motion';
 import AnimateText from './AnimateText'
-import PopupScreen from "./PopupScreen";
+import Popup from "./Popup";
 import cursorPNG from '../assets/imgs/cursorPNG.png'
 import cursorclickPNG from '../assets/imgs/cursorclickPNG.png'
 import settingsPNG from '../assets/imgs/settingsPNG.png'
@@ -19,9 +19,7 @@ const slides = [
     { id: 6, title: "temp" },
 ]
 
-
-
-const ScreenMenu = ({ manageEffects }) => {
+const ScreenMenu = ({ setVisualEffect }) => {
 
     const [currentSlide, setCurrentSlide] = useState(1);
     const [infoShow, setInfoShow] = useState(false);
@@ -72,7 +70,7 @@ const ScreenMenu = ({ manageEffects }) => {
             <div className="animatedBackground" style={{ width: "100%", height: "100%" }}> </div>
             <div style={{ zIndex: 1, width: "100%", height: "100%" }}>
                 <AnimatePresence mode="wait">
-                    {infoShow === true && <PopupScreen variant={"large"} content={
+                    {infoShow === true && <Popup variant={"large"} content={
                         <>
                             <button onClick={() => setInfoShow(false)} className="ExitButton">X</button>
                             <p style={{ width: "100%", height: "15%", display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.5em' }}>Controls</p>
@@ -86,11 +84,13 @@ const ScreenMenu = ({ manageEffects }) => {
                     } />}
                 </AnimatePresence>
                 <AnimatePresence mode="wait">
-                    {settingsShow === true && <PopupScreen variant={"large"} content={
+                    {settingsShow === true && <Popup variant={"large"} content={
                         <>
                             <button onClick={() => setSettingsShow(false)} className="ExitButton">X</button>
-                            <button style={{ width: "20%", height: "20%", margin: "5% 5%" }} onClick={() => manageEffects({ state: "HorizontalGlitch", duration: "3000" })}>Glitch me</button>
-                            <button style={{ width: "20%", height: "20%", margin: "5% 5%" }} onClick={() => manageEffects({ state: "Loading", duration: "350" })}>Load me</button>
+                            <button style={{ width: "100%", height: "5%", marginTop: "5%"}} onClick={() => setVisualEffect({ state: "HorizontalGlitch", duration: "3000" })}>Glitch me</button>
+                            <button style={{ width: "33%", height: "5%"}} onClick={() => setVisualEffect({ state: "Loading1", duration: "3000" })}>Load 1</button>
+                            <button style={{ width: "33%", height: "5%"}} onClick={() => setVisualEffect({ state: "Loading2", duration: "3000" })}>Load 2</button>
+                            <button style={{ width: "33%", height: "5%"}} onClick={() => setVisualEffect({ state: "Loading3", duration: "3000" })}>Load 3</button>
                         </>
                     } />}
                 </AnimatePresence>
@@ -102,7 +102,7 @@ const ScreenMenu = ({ manageEffects }) => {
                 </div>
                 <motion.div id="menuSlidesHolder" initial={{ x: `-${currentSlide * 31}vw` }} animate={{ x: `-${currentSlide * 31}vw` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
                     <div id="menuSlides">{slides.map(((slide, index) =>
-                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }}  id="clickSlide" ><div style={{ backgroundImage: `url(${slide.icon})` }} ></div></motion.button>
+                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} id="clickSlide" ><div style={{ backgroundImage: `url(${slide.icon})` }} ></div></motion.button>
                     ))}</div>
                 </motion.div>
             </div>

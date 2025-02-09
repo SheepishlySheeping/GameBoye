@@ -21,7 +21,7 @@ import { animate, AnimatePresence, color, motion } from 'framer-motion';
         }
     }
 
-const PopupScreen = ({ variant, content }) => {
+const Popup = ({ variant, content }) => {
     return (
         <motion.div variants={popupContainer} initial="hidden" animate="visible" exit="hidden" className="Popup">
             <div className="PopupContent" style={{ width: variant === "large" ? "50%" : "30%", height: variant === "large" ? "70%" : "50%" }}>
@@ -31,4 +31,4 @@ const PopupScreen = ({ variant, content }) => {
     )
 }
 
-export default PopupScreen;
+export default Popup;
