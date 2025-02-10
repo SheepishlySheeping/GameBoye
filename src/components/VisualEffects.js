@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../assets/styles/App.css';
-import { animate, AnimatePresence, color, delay, motion } from 'framer-motion';
+import { animate, delay, motion } from 'framer-motion';
 
 const animateSquares = {
     hidden: {
@@ -15,8 +15,11 @@ const animateSquares = {
 
 const VisualEffects = ({ variant, duration, setVisualEffect }) => {
 
-    const [positions, setPositions] = useState({ pos1: "0", pos2: "0", pos3: "0", pos4: "0", pos5: "0" })
-    const [variables, setVariables] = useState({ var1: "0", var2: "0", var3: "0", var4: "0", var5: "0" })
+    const [variables, setVariables] = useState({
+        vars1: ["0", "0", "0", "0", "0"],
+        vars2: ["0", "0", "0", "0", "0"]
+    });
+
     const squares = variant === "Loading1" ?
         [19, 17, 15, 13, 11, 9, 7, 5, 3, 1,
         20, 18, 16, 14, 12, 10, 8, 6, 4, 2,
@@ -41,26 +44,16 @@ const VisualEffects = ({ variant, duration, setVisualEffect }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             if (variant === "HorizontalGlitch") {
-                setPositions({
-                    pos1: `${Math.random() * 100}%`,
-                    pos2: `${Math.random() * 100}%`,
-                    pos3: `${Math.random() * 100}%`,
-                    pos4: `${Math.random() * 100}%`,
-                    pos5: `${Math.random() * 100}%`,
-                });
                 setVariables({
-                    var1: `${5 + Math.random() * 15}%`,
-                    var2: `${5 + Math.random() * 15}%`,
-                    var3: `${5 + Math.random() * 15}%`,
-                    var4: `${5 + Math.random() * 15}%`,
-                    var5: `${5 + Math.random() * 15}%`,
-                });
+                    vars1: Array.from({ length: 5 }, () => `${Math.random() * 100}%`),
+                    vars2: Array.from({ length: 5 }, () => `${5 + Math.random() * 15}%`),
+                })
             }
         }, 50);
 
         const timeout = setTimeout(() => {
             clearInterval(interval);
-            setVisualEffect({ state: "Off", duration: "0" })
+            setVisualEffect({ variant: "Off", duration: 0 })
         }, duration);
 
         return () => {
@@ -90,7 +83,7 @@ const VisualEffects = ({ variant, duration, setVisualEffect }) => {
                     )}
                 </div>
             )}
-            {variant.includes("Loading") && (
+            {variant.startsWith("Loading") && (
                 <div
                     style={{
                         pointerEvents: "all",

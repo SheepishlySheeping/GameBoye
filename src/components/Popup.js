@@ -1,33 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../assets/styles/App.css';
-import { animate, AnimatePresence, color, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-    const popupContainer = {
-        hidden: {
-            opacity: 0,
-            scale: 0,
-            transition: {
-                duration: 0.5,
-                ease: 'easeInOut',
-            },
-        },
-        visible: {
-            opacity: 1,
-            scale: 1,
-            transition: {
-                duration: 0.5,
-                ease: 'easeInOut',
-            },
+const Popup = ({ variant, content, duration, setPopupState }) => {
+
+    useEffect(() => {
+        if (duration !== 0) {
+            const timeout = setTimeout(() => {
+                setPopupState({ variant: "Off", content: "", duration: 0 });
+            }, duration);
+            return () => {
+                clearTimeout(timeout);
+            }
         }
-    }
 
-const Popup = ({ variant, content }) => {
+    }, [variant, content, duration])
+
     return (
-        <motion.div variants={popupContainer} initial="hidden" animate="visible" exit="hidden" className="Popup">
-            <div className="PopupContent" style={{ width: variant === "large" ? "50%" : "30%", height: variant === "large" ? "70%" : "50%" }}>
-                {content}
-            </div>
-        </motion.div>
+        <>
+            {variant !== "Off" && (<div>
+                <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} transition={{ duration: 0.5, ease: 'easeInOut'}} className="PopupContainer"></motion.div>
+                <motion.div initial={{scale: 0}} animate={{scale: 1}} exit={{scale: 0}} transition={{ duration: 0.5, ease: 'easeInOut'}} className="Popup">
+                    <div className="PopupContent" style={{ width: variant === "Large" ? "50%" : "30%", height: variant === "Large" ? "70%" : "50%" }}>
+                        {content}
+                    </div>
+                </motion.div>
+            </div>)}
+        </>
     )
 }
 

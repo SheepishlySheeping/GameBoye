@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useState, useEffect } from "react";
 import '../assets/styles/App.css';
 import { AnimatePresence, motion } from 'framer-motion';
 import AnimateText from './AnimateText'
@@ -19,13 +19,29 @@ const slides = [
     { id: 6, title: "temp" },
 ]
 
-const ScreenMenu = ({ setVisualEffect }) => {
+const ScreenMenu = ({ setVisualEffect, setClickBlocked, setPopupState }) => {
 
     const [currentSlide, setCurrentSlide] = useState(1);
-    const [infoShow, setInfoShow] = useState(false);
-    const [settingsShow, setSettingsShow] = useState(false);
-    const [clickDisabledPrev, setClickDisabledPrev] = useState(false);
-    const [clickDisabledNext, setClickDisabledNext] = useState(false);
+
+    const popupContents = [
+    <>
+        <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="ExitButton">X</button>
+        <p style={{ width: "100%", height: "15%", display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.5em' }}>Controls</p>
+        <img src={cursorPNG} style={{ width: "50%", height: "30%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }}></img>
+        <img src={cursorclickPNG} style={{ width: "50%", height: "30%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }}></img>
+        <p style={{ width: "45%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Normal</p>
+        <p style={{ width: "55%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Interactable</p>
+        <div style={{ width: "80%", height: "1.5%", backgroundColor: 'black', margin: '0 10%' }}></div>
+        <p style={{ width: "90%", height: "44.5%", margin: '2% 5%' }}>Created by Sheep<br /><br />My very first project!!!<br />Very buggy, if you encounter any, just hit the topleft off on button :3</p>
+    </>,
+    <>
+        <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="ExitButton">X</button>
+        <button style={{ width: "100%", height: "5%", marginTop: "5%" }} onClick={() => setVisualEffect({ variant: "HorizontalGlitch", duration: 3000 })}>Glitch me</button>
+        <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading1", duration: 3000 })}>Load 1</button>
+        <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading2", duration: 3000 })}>Load 2</button>
+        <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading3", duration: 3000 })}>Load 3</button>
+    </>
+]
 
     const buttonAnimation = (index) => ({
         scale: currentSlide === index ? 1 : (currentSlide === index + 1 || currentSlide === index - 1) ? 0.5 : 0,
@@ -33,77 +49,40 @@ const ScreenMenu = ({ setVisualEffect }) => {
     });
 
     const changeSlide = (direction) => {
-        let newSlide = currentSlide;
-        if (direction === "prev") {
-            if (currentSlide !== 0) newSlide -= 1;
-        };
-        if (direction === "next") {
-            if (currentSlide !== slides.length - 1) newSlide += 1;
-        };
-        setCurrentSlide(newSlide);
-        clickTimeout(newSlide);
+        if (direction === "prev") setCurrentSlide(currentSlide - 1);
+        if (direction === "next") setCurrentSlide(currentSlide + 1);
+        clickTimeout();
     };
 
-    const clickTimeout = (newSlide) => {
-        setClickDisabledPrev(true);
-        setClickDisabledNext(true);
+    const clickTimeout = () => {
+        setClickBlocked(true);
         setTimeout(() => {
-            if (newSlide === 0) setClickDisabledNext(false);
-            else if (newSlide === slides.length - 1) setClickDisabledPrev(false);
-            else {
-                setClickDisabledPrev(false);
-                setClickDisabledNext(false);
-            }
+            setClickBlocked(false);
         }, 550);
     };
 
     const menuPopup = {
-        1: () => setSettingsShow(true),
-        2: () => setInfoShow(true),
+        1: () => setPopupState({ variant: "Large", content: popupContents[1], duration: 0 }),
+        2: () => setPopupState({ variant: "Large", content: popupContents[0], duration: 0 }),
     };
     const menuClick = (id) => {
         menuPopup[id]?.();
+        clickTimeout();
     }
 
     return (
         <>
             <div className="animatedBackground" style={{ width: "100%", height: "100%" }}> </div>
             <div style={{ zIndex: 1, width: "100%", height: "100%" }}>
-                <AnimatePresence mode="wait">
-                    {infoShow === true && <Popup variant={"large"} content={
-                        <>
-                            <button onClick={() => setInfoShow(false)} className="ExitButton">X</button>
-                            <p style={{ width: "100%", height: "15%", display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.5em' }}>Controls</p>
-                            <img src={cursorPNG} style={{ width: "50%", height: "30%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }}></img>
-                            <img src={cursorclickPNG} style={{ width: "50%", height: "30%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }}></img>
-                            <p style={{ width: "45%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Normal</p>
-                            <p style={{ width: "55%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Interactable</p>
-                            <div style={{ width: "80%", height: "1.5%", backgroundColor: 'black', margin: '0 10%' }}></div>
-                            <p style={{ width: "90%", height: "44.5%", margin: '2% 5%' }}>Created by Sheep<br /><br />My very first project!!!<br />Very buggy, if you encounter any, just hit the topleft off on button :3</p>
-                        </>
-                    } />}
-                </AnimatePresence>
-                <AnimatePresence mode="wait">
-                    {settingsShow === true && <Popup variant={"large"} content={
-                        <>
-                            <button onClick={() => setSettingsShow(false)} className="ExitButton">X</button>
-                            <button style={{ width: "100%", height: "5%", marginTop: "5%"}} onClick={() => setVisualEffect({ state: "HorizontalGlitch", duration: "3000" })}>Glitch me</button>
-                            <button style={{ width: "33%", height: "5%"}} onClick={() => setVisualEffect({ state: "Loading1", duration: "3000" })}>Load 1</button>
-                            <button style={{ width: "33%", height: "5%"}} onClick={() => setVisualEffect({ state: "Loading2", duration: "3000" })}>Load 2</button>
-                            <button style={{ width: "33%", height: "5%"}} onClick={() => setVisualEffect({ state: "Loading3", duration: "3000" })}>Load 3</button>
-                        </>
-                    } />}
-                </AnimatePresence>
                 <div id="menuTitleHolder"><AnimateText text={slides[currentSlide].title}></AnimateText></div>
                 <div id="menuSlideChangerHolder">
-                    <button className="menuSlideChanger" onClick={() => changeSlide("prev")} disabled={clickDisabledPrev}></button>
-                    <div style={{ width: '49%' }}> </div>
-                    <button className="menuSlideChanger" onClick={() => changeSlide("next")} disabled={clickDisabledNext}></button>
+                    <button className="menuSlideChanger" onClick={() => changeSlide("prev")} style={{ display: currentSlide === 0 ? "none" : "block", left: "10.8%" }}></button>
+                    <button className="menuSlideChanger" onClick={() => changeSlide("next")} style={{ display: currentSlide === slides.length - 1 ? "none" : "block", right: "10.2%" }}></button>
                 </div>
                 <motion.div id="menuSlidesHolder" initial={{ x: `-${currentSlide * 31}vw` }} animate={{ x: `-${currentSlide * 31}vw` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
-                    <div id="menuSlides">{slides.map(((slide, index) =>
-                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} id="clickSlide" ><div style={{ backgroundImage: `url(${slide.icon})` }} ></div></motion.button>
-                    ))}</div>
+                    {slides.map(((slide, index) =>
+                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} id="menuSlide" ><div style={{ backgroundImage: `url(${slide.icon})` }} ></div></motion.button>
+                    ))}
                 </motion.div>
             </div>
         </>

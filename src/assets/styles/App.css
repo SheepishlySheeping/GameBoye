@@ -159,43 +159,39 @@ p {
   width: 100%;
   height: 60%;
   white-space: nowrap;
+  align-items: center;
 }
 
 #menuSlideChangerHolder {
   position: absolute;
-  top: 20%;
+  top: 19.5%;
   width: 100%;
   height: 60%;
-  padding-top: 5.5%;
   display: flex;
-  justify-content: center;
 }
 
 .menuSlideChanger {
+  position: absolute;
+  top: 6.2vw;
   z-index: 2;
-  opacity: 0;
-  width: 15vw;
-  height: 15vw;
+  width: 13vw;
+  height: 13vw;
 }
 
-#clickSlide {
+#menuSlide {
   width: 25vw;
   height: 25vw;
   margin: 0 3vw;
   background-size: cover;
   background-image: radial-gradient( circle, rgba(0, 255, 255) 30%, rgb(0, 190, 255));
   background-blend-mode: multiply;
+  top: 50%
 }
 
-#clickSlide div {
+#menuSlide div {
   width: 100%;
   height: 100%;
   background-size: cover;
-}
-
-#menuSlides {
-  width: 100%;
-  height: 100%;
 }
 
 .PopupContent {
@@ -203,4 +199,12 @@ p {
   display: flex;
   flex-wrap: wrap;
   background-image: radial-gradient( circle, rgba(0, 255, 255) 30%, rgb(0, 190, 255));
+}
+
+
+.PopupContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0)
 }
