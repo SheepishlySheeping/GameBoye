@@ -1,4 +1,4 @@
-import React, { use, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import '../assets/styles/App.css';
 import { AnimatePresence, motion } from 'framer-motion';
 import AnimateText from './AnimateText'

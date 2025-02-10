@@ -66,14 +66,14 @@ const VisualEffects = ({ variant, duration, setVisualEffect }) => {
         <div style={{ width: "100%", height: "100%", position: "absolute", pointerEvents: "none", zIndex: "4", }}>
             {variant === "HorizontalGlitch" && (
                 <div>
-                    {[positions.pos1, positions.pos2, positions.pos3, positions.pos4].map(
+                    {[variables.vars1[0], variables.vars1[1], variables.vars1[2], variables.vars1[3]].map(
                         (pos, index) => (
                             <div
                                 key={index}
                                 style={{
                                     backgroundColor: "black",
                                     width: "100%",
-                                    height: variables[`var${index + 1}`],
+                                    height: variables.vars2[index],
                                     opacity: "0.15",
                                     top: pos,
                                     position: "absolute",

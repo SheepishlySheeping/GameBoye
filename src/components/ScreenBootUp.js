@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import '../assets/styles/App.css';
-import { animate, AnimatePresence, color, delay, easeOut, motion } from 'framer-motion';
+import { animate, AnimatePresence, color, delay, motion } from 'framer-motion';
 
-const fdsd = {
+const fall = {
     top: {
         y: "-60vh",
     },
@@ -16,13 +16,14 @@ const name = ["G", "A", "M", "E", "B", "O", "Y", "E"];
 const ScreenBootUp = ({ setVisualEffect, setGameState }) => {
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
+        const timeout1 = setTimeout(() => {
             setVisualEffect({ variant: "Loading3", duration: "1500" })
         }, 5000);
 
         const timeout2 = setTimeout(() => setGameState("gameMenu"), 6400 )
 
-        return () => {clearTimeout(timeout);
+        return () => {
+            clearTimeout(timeout1);
             clearTimeout(timeout2);
         }
 
@@ -36,13 +37,13 @@ const ScreenBootUp = ({ setVisualEffect, setGameState }) => {
                         key={index}
                         style={{
                             backgroundColor: "rgba(255, 255, 255)",
-                            width: "8%",
-                            height: "80%",
-                            margin: "0 1%",
+                            width: "8vw",
+                            height: "8vw",
+                            margin: "0 0.5vw",
                             fontSize: "7.5rem",
                             textAlign: "center",
                         }}
-                        variants={fdsd}
+                        variants={fall}
                         initial="top"
                         animate="fall"
                         exit="hidden"
