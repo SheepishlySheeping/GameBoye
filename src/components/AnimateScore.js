@@ -14,7 +14,7 @@ const AnimateScore = ({ scorePrev, score, setGamePrevScore }) => {
                         cancelAnimationFrame(frame);
                         return thisScore;
                     }
-                    return thisScore + 1;
+                    return thisScore + 2;
                 });
                 frame = requestAnimationFrame(animateScore)
             }

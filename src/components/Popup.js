@@ -14,7 +14,7 @@ const Popup = ({ variant, content, duration, setPopupState }) => {
             }
         }
 
-    }, [content])
+    }, [])
 
     return (
         <>

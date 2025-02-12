@@ -5,25 +5,14 @@ import AnimateString from './AnimateString'
 import AnimateScore from './AnimateScore'
 import cursorPNG from '../assets/imgs/cursorPNG.png'
 import cursorclickPNG from '../assets/imgs/cursorclickPNG.png'
-import settingsPNG from '../assets/imgs/settingsPNG.png'
-import infoPNG from '../assets/imgs/infoPNG.png'
-import tictactoePNG from '../assets/imgs/tictactoePNG.png'
-import tetrisPNG from '../assets/imgs/tetrisPNG.png'
+import lockPNG from '../assets/imgs/lockPNG.png'
 
-const ScreenMenu = ({ setVisualEffect, setClickBlocked, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore }) => {
+const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore }) => {
 
-    const [slides, setSlides] = useState([
-        { id: 1, title: "Settings", icon: settingsPNG, reqScore: 0, unlocked: true },
-        { id: 2, title: "Info", icon: infoPNG, reqScore: 0, unlocked: true },
-        { id: 3, title: "Tic Tac Toe", icon: tictactoePNG, reqScore: 0, unlocked: true },
-        { id: 4, title: "Tetris", icon: tetrisPNG, reqScore: 1500, unlocked: false },
-        { id: 5, title: "Spike Throw", icon: tetrisPNG, reqScore: 2000, unlocked: false },
-        { id: 6, title: "Temp", icon: tetrisPNG, reqScore: 2500, unlocked: false }
-    ]);
     const [currentSlide, setCurrentSlide] = useState(1);
-    const [animationStage, setAnimationStage] = useState(0);
+    const [animationStage, setAnimationStage] = useState(-1);
+    const timeouts = useRef([]);
     const timeout1 = useRef(null);
-
 
     const popupContents = [
         <>
@@ -42,7 +31,7 @@ const ScreenMenu = ({ setVisualEffect, setClickBlocked, setPopupState, gameTotal
             <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading1", duration: 3000 })}>Load 1</button>
             <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading2", duration: 3000 })}>Load 2</button>
             <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading3", duration: 3000 })}>Load 3</button>
-            <button style={{ width: "33%", height: "5%" }} onClick={() => setGameTotalScore((prevScores) => ( prevScores + 2000 ))}>Add 2000 Score</button>
+            <button style={{ width: "33%", height: "5%" }} onClick={() => setGameTotalScore((prevScores) => (prevScores + 2000))}>Add 2000 Score</button>
         </>
     ]
 
@@ -77,20 +66,35 @@ const ScreenMenu = ({ setVisualEffect, setClickBlocked, setPopupState, gameTotal
     }
 
     useEffect(() => {
+
+        setClickBlocked(true);
         let tempSlides = [...slides];
-        setClickBlocked(false);
         let toUnlock = [];
 
         for (let i = 3; i < tempSlides.length; i++) {
-            if ( gameTotalScore >= tempSlides[i].reqScore) {
+            if (!tempSlides[i].unlocked && gameTotalScore >= tempSlides[i].reqScore) {
                 setPopupState({ variant: "Off", content: "", duration: 0 });
                 toUnlock.push(i);
             }
         }
-        console.log(gamePrevScore);
-        console.log(gameTotalScore);
-        toUnlock.forEach((index) => console.log(index));
 
+        toUnlock.forEach((value, index) => {
+            const tempTimeout = setTimeout(() => {
+                setCurrentSlide(value);
+                tempSlides[value].unlocked = true;
+                setSlides(tempSlides);
+            }, index * 3000);
+            timeouts.current.push(tempTimeout);
+        });
+
+        const timeout = setTimeout(() => {
+            setClickBlocked(false);
+        }, toUnlock.length * 3000);
+
+        return () => {
+            clearTimeout(timeout);
+            timeouts.current.forEach((timeout) => clearTimeout(timeout));
+        }
     }, [gameTotalScore])
 
     return (
@@ -104,8 +108,9 @@ const ScreenMenu = ({ setVisualEffect, setClickBlocked, setPopupState, gameTotal
                 </div>
                 <motion.div className="menuSlidesHolder" initial={{ x: `-${currentSlide * 31}vw` }} animate={{ x: `-${currentSlide * 31}vw` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
                     {slides.map(((slide, index) =>
-                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} className="menuSlide" style={{ background: `url(${slide.icon}), radial-gradient(circle, rgba(0, 255, 255) 30%, rgb(0, 190, 255))`, backgroundSize: "cover" }} >
-                            <AnimatePresence mode="wait">{!slide.unlocked && <motion.div style={{ width: "100%", height: "100%", backgroundColor: "red" }} animation={{ scale: "1" }} exit={{ scale: "0" }} transition={{ duration: "7" }}></motion.div>}</AnimatePresence>
+                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} className="menuSlide" style={{ background: `url(${slide.icon}), radial-gradient(circle, rgba(0, 255, 255) 30%, rgba(0, 190, 255))`, backgroundSize: "cover" }} >
+                            <AnimatePresence mode="wait">{!slide.unlocked && <motion.div style={{ background: `url(${lockPNG}), radial-gradient(circle, rgba(150, 150, 150) 30%, rgba(100, 100, 100))`, backgroundSize: "cover" }}
+                                animation={{ scale: 1, opacity: 1 }} exit={{ scale: 1.3, opacity: 0 }} transition={{ delay: "0.5", duration: "3" }}></motion.div>}</AnimatePresence>
                         </motion.button>
                     ))}
                 </motion.div>

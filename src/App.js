@@ -5,6 +5,10 @@ import VisualEffects from './components/VisualEffects';
 import ScreenMenu from './components/ScreenMenu';
 import ScreenBootUp from './components/ScreenBootUp'
 import Popup from "./components/Popup";
+import settingsPNG from './assets/imgs/settingsPNG.png'
+import infoPNG from './assets/imgs/infoPNG.png'
+import tictactoePNG from './assets/imgs/tictactoePNG.png'
+import tetrisPNG from './assets/imgs/tetrisPNG.png'
 
 const SwitchAnimate = {
   off: {
@@ -32,6 +36,14 @@ function App() {
   const [gamePrevScore, setGamePrevScore] = useState(0);
   const [visualEffect, setVisualEffect] = useState({ variant: "Off", duration: 0 });
   const [popupState, setPopupState] = useState({ variant: "Off", content: "", duration: 0 });
+  const [slides, setSlides] = useState([
+    { id: 1, title: "Settings", icon: settingsPNG, reqScore: 0, unlocked: true },
+    { id: 2, title: "Info", icon: infoPNG, reqScore: 0, unlocked: true },
+    { id: 3, title: "Tic Tac Toe", icon: tictactoePNG, reqScore: 0, unlocked: true },
+    { id: 4, title: "Tetris", icon: tetrisPNG, reqScore: 1500, unlocked: false },
+    { id: 5, title: "Spike Throw", icon: tetrisPNG, reqScore: 2000, unlocked: false },
+    { id: 6, title: "Temp", icon: tetrisPNG, reqScore: 2500, unlocked: false }
+  ]);
 
   const timeout = useRef(null);
 
@@ -85,7 +97,7 @@ function App() {
           {popupState.variant !== "Off" && <Popup variant={popupState.variant} content={popupState.content} duration={popupState.duration} setPopupState={setPopupState} />}
         </AnimatePresence>
         {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
-        {gameState === "gameMenu" && <ScreenMenu setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
+        {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
       </div>
 
       <p className="Bar">
