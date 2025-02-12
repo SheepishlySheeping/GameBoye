@@ -1,57 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../assets/styles/App.css';
-import { animate, AnimatePresence, color, delay, motion } from 'framer-motion';
-
-const fall = {
-    top: {
-        y: "-60vh",
-    },
-    fall: {
-        y: "0%",
-    }
-}
+import { motion } from 'framer-motion';
 
 const name = ["G", "A", "M", "E", "B", "O", "Y", "E"];
 
 const ScreenBootUp = ({ setVisualEffect, setGameState }) => {
+    const [animationStage, setAnimationStage] = useState(0);
 
     useEffect(() => {
         const timeout1 = setTimeout(() => {
             setVisualEffect({ variant: "Loading3", duration: "1500" })
-        }, 5000);
+        }, 7000);
 
-        const timeout2 = setTimeout(() => setGameState("gameMenu"), 6400 )
+        const timeout2 = setTimeout(() => setGameState("gameMenu"), 8400 )
 
         return () => {
             clearTimeout(timeout1);
             clearTimeout(timeout2);
         }
 
-    }, [])
+    }, []);
 
     return (
         <>
-            <div style={{ position: "absolute", width: "100%", height: "20%", top: "40%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div className="bootupHolder">
                 {name.map((a, index) => (
                     <motion.div
                         key={index}
-                        style={{
-                            backgroundColor: "rgba(255, 255, 255)",
-                            width: "8vw",
-                            height: "8vw",
-                            margin: "0 0.5vw",
-                            fontSize: "7.5rem",
-                            textAlign: "center",
+                        className="bootupBoxes"
+                        initial={{
+                            opacity: 0,
                         }}
-                        variants={fall}
-                        initial="top"
-                        animate="fall"
-                        exit="hidden"
+                        animate={ animationStage === 0 ? {
+                            opacity: 1
+                        } : 
+                        {
+                            opacity: 1,
+                            y: ["0", "-5.5vw", "0"],
+                        }}
                         transition={{
-                            delay: index === 0 ? 1.5 : 1.5 + (index) * 0.15,
-                            duration: 1,
-                            ease: "easeInOut"
+                            delay: animationStage === 0 ? 1.5 : 0.5 + (index) * 0.15,
+                            duration:  animationStage === 0 ? 2 : 1,
+                            ease: "easeInOut",
                         }}
+                        onAnimationComplete={ animationStage === 0 ? () => setAnimationStage(1) : null}
                     >{a}</motion.div>
                 ))}
             </div>

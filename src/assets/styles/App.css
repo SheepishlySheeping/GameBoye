@@ -1,3 +1,7 @@
+html {
+  font-size: 1vw;
+}
+
 @font-face {
   font-family: 'Minecraft';
   src: url('/src/assets/fonts/Minecraft.ttf') format('truetype');
@@ -21,7 +25,7 @@ p {
 }
 
 .App {
-  background: 
+  background:
     url('/src/assets/imgs/plasticPNG.png'),
     linear-gradient(to left, rgba(0, 0, 139) 97%, rgba(0, 0, 50)),
     linear-gradient(to right, rgba(0, 0, 139) 97%, rgba(0, 0, 50)),
@@ -47,21 +51,26 @@ p {
 
 .Bar {
   justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  font-style: italic;
+  color: rgba(130, 130, 130);
 }
 
 .IOSwitch {
   width: 10%;
   height: 50%;
-  background-color: slategray;
+  background-color: rgba(100, 100, 100);
   border-radius: 15%;
-  border: 0.5vh solid black;
+  border: 0.5vh solid rgba(0, 0, 0);
   margin-left: 3%;
 }
 
 .IOSwitchBar {
   width: 80%;
   height: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,21 +79,22 @@ p {
 .IOSwitchBar div {
   height: 80%;
   width: 15%;
-  background-color: darkgray;
+  background-color: rgba(200, 200, 200);
   border-radius: 15%;
 }
 
 .IOSwitchBar p {
   margin: 0% 15%;
   font: bold;
-  color: silver;
+  font-size: 1.5rem;
+  color: rgba(200, 200, 200);
 }
 
 .ExitButton {
   position: absolute;
   width: 3vw;
   height: 3vw;
-  background-color: red;
+  background-color: rgba(255, 0, 0);
   right: 0;
   top: 0;
   margin: 1%;
@@ -109,7 +119,7 @@ p {
   width: 95%;
   height: 85%;
   margin: 0 2.5%;
-  background-color: rgb(100, 100, 255);
+  background-color: rgba(100, 100, 255);
   border-radius: 10%;
   display: flex;
   position: relative;
@@ -124,7 +134,7 @@ p {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient( ellipse at center, rgba(255, 255, 255, 0) 15%, rgb(255, 255, 255, 0.15));
+  background-image: radial-gradient(ellipse at center, rgba(255, 255, 255, 0) 15%, rgb(255, 255, 255, 0.15));
 }
 
 .animatedBackground {
@@ -133,26 +143,30 @@ p {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: 
-  linear-gradient(90deg, rgba(0, 255, 255, 0.15) 5%, transparent 1%),
-  linear-gradient(0deg, rgba(0, 255, 255, 0.15) 5%, transparent 1%);
+  background:
+    linear-gradient(90deg, rgba(0, 255, 255, 0.15) 5%, transparent 1%),
+    linear-gradient(0deg, rgba(0, 255, 255, 0.15) 5%, transparent 1%);
   background-size: 5% 11%;
 }
 
 @keyframes animateBackground {
-  0% { background-position: 0 0; }
-  100% { background-position: 5.3% 12% }
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 5.3% 12%
+  }
 }
 
-#menuTitleHolder {
-  animation: distort 3s linear infinite; 
+.menuTitleHolder {
   width: 100%;
   padding-top: 2.5%;
-  font-size: 2em;
+  font-size: 3rem;
   text-align: center;
 }
 
-#menuSlidesHolder {
+.menuSlidesHolder {
   position: absolute;
   top: 20%;
   left: 32.33vw;
@@ -162,7 +176,7 @@ p {
   align-items: center;
 }
 
-#menuSlideChangerHolder {
+.menuSlideChangerHolder {
   position: absolute;
   top: 19.5%;
   width: 100%;
@@ -178,17 +192,15 @@ p {
   height: 13vw;
 }
 
-#menuSlide {
+.menuSlide {
   width: 25vw;
   height: 25vw;
   margin: 0 3vw;
-  background-size: cover;
-  background-image: radial-gradient( circle, rgba(0, 255, 255) 30%, rgb(0, 190, 255));
   background-blend-mode: multiply;
   top: 50%
 }
 
-#menuSlide div {
+.menuSlide div {
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -198,7 +210,7 @@ p {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  background-image: radial-gradient( circle, rgba(0, 255, 255) 30%, rgb(0, 190, 255));
+  background-image: radial-gradient(circle, rgba(0, 255, 255) 30%, rgb(0, 190, 255));
 }
 
 
@@ -207,4 +219,31 @@ p {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0)
+}
+
+.bootupHolder {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  top: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bootupBoxes {
+  background-color: rgba(255, 255, 255);
+  width: 8vw;
+  height: 8vw;
+  margin: 0 0.5vw;
+  font-size: 9.5rem;
+  text-align: center;
+}
+
+.visualEffectsOverlay {
+  width: 100%;
+  height: 100%; 
+  position: absolute;
+  pointer-events: none;
+  z-index: 4;
 }

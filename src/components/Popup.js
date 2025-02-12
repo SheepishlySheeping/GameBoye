@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import '../assets/styles/App.css';
 import { motion } from 'framer-motion';
 
@@ -14,7 +14,7 @@ const Popup = ({ variant, content, duration, setPopupState }) => {
             }
         }
 
-    }, [variant, content, duration])
+    }, [content])
 
     return (
         <>

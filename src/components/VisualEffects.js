@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import '../assets/styles/App.css';
-import { animate, delay, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const animateSquares = {
     hidden: {
@@ -60,10 +60,10 @@ const VisualEffects = ({ variant, duration, setVisualEffect }) => {
             clearInterval(interval);
             clearTimeout(timeout);
         };
-    }, [variant, duration])
+    }, [])
 
     return (
-        <div style={{ width: "100%", height: "100%", position: "absolute", pointerEvents: "none", zIndex: "4", }}>
+        <div className="visualEffectsOverlay">
             {variant === "HorizontalGlitch" && (
                 <div>
                     {[variables.vars1[0], variables.vars1[1], variables.vars1[2], variables.vars1[3]].map(

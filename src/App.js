@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import './assets/styles/App.css';
 import VisualEffects from './components/VisualEffects';
@@ -28,6 +28,8 @@ function App() {
   const [switchState, setSwitchState] = useState({ on: false, disabled: false });
   const [clickBlocked, setClickBlocked] = useState(false);
   const [gameState, setGameState] = useState("gameOff");
+  const [gameTotalScore, setGameTotalScore] = useState(0);
+  const [gamePrevScore, setGamePrevScore] = useState(0);
   const [visualEffect, setVisualEffect] = useState({ variant: "Off", duration: 0 });
   const [popupState, setPopupState] = useState({ variant: "Off", content: "", duration: 0 });
 
@@ -83,12 +85,12 @@ function App() {
           {popupState.variant !== "Off" && <Popup variant={popupState.variant} content={popupState.content} duration={popupState.duration} setPopupState={setPopupState} />}
         </AnimatePresence>
         {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
-        {gameState === "gameMenu" && <ScreenMenu setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} />}
+        {gameState === "gameMenu" && <ScreenMenu setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
       </div>
 
-      <div className="Bar">
-        <p className="appName">GAMEBOYE</p>
-      </div>
+      <p className="Bar">
+        GAMEBOYE
+      </p>
     </div>
   );
 }
