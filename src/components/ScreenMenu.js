@@ -83,13 +83,13 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPo
                 setCurrentSlide(value);
                 tempSlides[value].unlocked = true;
                 setSlides(tempSlides);
-            }, index * 3000);
+            }, index * 2000);
             timeouts.current.push(tempTimeout);
         });
 
         const timeout = setTimeout(() => {
             setClickBlocked(false);
-        }, toUnlock.length * 3000);
+        }, toUnlock.length * 2000);
 
         return () => {
             clearTimeout(timeout);
@@ -108,13 +108,13 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPo
                 </div>
                 <motion.div className="menuSlidesHolder" initial={{ x: `-${currentSlide * 31}vw` }} animate={{ x: `-${currentSlide * 31}vw` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
                     {slides.map(((slide, index) =>
-                        <motion.button key={index} onClick={() => menuClick(slide.id)} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} className="menuSlide" style={{ background: `url(${slide.icon}), radial-gradient(circle, rgba(0, 255, 255) 30%, rgba(0, 190, 255))`, backgroundSize: "cover" }} >
+                        <motion.button key={index} onClick={() => menuClick(slide.id)} disabled={!slide.unlocked} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} className={`menuSlide ${currentSlide === index ? 'buttonHover' : ''}`} style={{ background: `url(${slide.icon}), radial-gradient(circle, rgba(0, 255, 255) 30%, rgba(0, 190, 255))`, backgroundSize: "cover" }} >
                             <AnimatePresence mode="wait">{!slide.unlocked && <motion.div style={{ background: `url(${lockPNG}), radial-gradient(circle, rgba(150, 150, 150) 30%, rgba(100, 100, 100))`, backgroundSize: "cover" }}
-                                animation={{ scale: 1, opacity: 1 }} exit={{ scale: 1.3, opacity: 0 }} transition={{ delay: "0.5", duration: "3" }}></motion.div>}</AnimatePresence>
+                                animation={{ scale: 1, opacity: 1 }} exit={{ scale: 1.3, opacity: 0 }} transition={{ delay: "0.5", duration: "2" }}></motion.div>}</AnimatePresence>
                         </motion.button>
                     ))}
                 </motion.div>
-                <div style={{ width: "100%", height: "12.5%", position: "absolute", bottom: "0%", display: "flex", justifyContent: "center", fontSize: "3.5rem" }}>
+                <div className="menuScoreHolder">
                     <AnimateScore scorePrev={gamePrevScore} score={gameTotalScore} setGamePrevScore={setGamePrevScore}></AnimateScore>
                 </div>
             </div>

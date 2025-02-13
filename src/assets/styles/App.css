@@ -161,49 +161,72 @@ p {
 
 .menuTitleHolder {
   width: 100%;
-  padding-top: 2.5%;
+  height: 12%;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5%;
   font-size: 3rem;
   text-align: center;
 }
 
 .menuSlidesHolder {
-  position: absolute;
-  top: 20%;
+  background-color: green;
+  position: relative;
+  display: flex;
+  align-items: center;
   left: 32.33vw;
   width: 100%;
-  height: 60%;
+  height: 70%;
   white-space: nowrap;
   align-items: center;
 }
 
 .menuSlideChangerHolder {
   position: absolute;
-  top: 19.5%;
+  background-color: orange;
+  display: flex;
+  align-items: center;
   width: 100%;
-  height: 60%;
+  height: 70%;
   display: flex;
 }
 
 .menuSlideChanger {
+  background-color: red;
+  opacity: 0.5;
   position: absolute;
-  top: 6.2vw;
   z-index: 2;
   width: 13vw;
   height: 13vw;
 }
 
 .menuSlide {
+  flex-shrink: 0;
+  position: relative;
   width: 25vw;
   height: 25vw;
   margin: 0 3vw;
   background-blend-mode: multiply;
-  top: 50%
 }
 
 .menuSlide div {
   width: 100%;
   height: 100%;
   background-size: cover;
+}
+
+.menuScoreHolder {
+  width:  100%;
+  background-color: red;
+  height:  12%;
+  position:  relative;
+  display:  flex;
+  align-items: center;
+  margin-top: 1.5%;
+  justify-content:  center ;
+  font-size :  3.5rem 
 }
 
 .PopupContent {
@@ -247,3 +270,27 @@ p {
   pointer-events: none;
   z-index: 4;
 }
+
+.buttonHover {
+  overflow: hidden;
+}
+
+.buttonHover::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 25vw;
+  width: 25vw;
+  top: 0vw;
+  opacity: 0;
+  border-radius: 25%;
+  background-color: rgba(0, 0, 255, 0.5);
+  transform: scale(0);
+  transition: transform 1s ease-out, opacity 0.5s ease-out;
+}
+
+.buttonHover:hover::before {
+  transform: scale(0.9);
+  opacity: 1;
+}
+
