@@ -89,7 +89,7 @@ function App() {
       </div>
 
       <div className="Box" style={{ backgroundColor: gameState === "gameBootUp" ? "rgba(15, 15, 15)" : "rgba(100, 100, 255)" }}>
-        <div style={{ zIndex: "5", position: "absolute", height: "100%", width: "100%", pointerEvents: clickBlocked === true ? "all" : "none", backgroundColor: gameState === "gameOff" ? "rgba(0, 0, 0)" : "rgba(0, 0, 0, 0)" }}> </div>
+        <div className="clickBlocker" style={{ pointerEvents: clickBlocked === true ? "all" : "none", backgroundColor: gameState === "gameOff" ? "rgba(0, 0, 0)" : "rgba(0, 0, 0, 0)" }}> </div>
         <AnimatePresence mode="wait">
           {visualEffect.variant !== "Off" && <VisualEffects variant={visualEffect.variant} duration={visualEffect.duration} setVisualEffect={setVisualEffect} />}
         </AnimatePresence>

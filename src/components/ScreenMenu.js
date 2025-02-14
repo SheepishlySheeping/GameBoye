@@ -101,24 +101,23 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPo
         <>
             <div className="animatedBackground" style={{ width: "100%", height: "100%" }}> </div>
             <div style={{ zIndex: 1, width: "100%", height: "100%" }}>
-                <div className="menuTitleHolder"><AnimateString text={gameTotalScore < slides[currentSlide].reqScore ? ("Score " + slides[currentSlide].reqScore + " To Unlock") : (slides[currentSlide].title)} ></AnimateString></div>
+                <div className="menuTitleHolder sway"><AnimateString text={gameTotalScore < slides[currentSlide].reqScore ? ("Score " + slides[currentSlide].reqScore + " To Unlock") : (slides[currentSlide].title)} ></AnimateString></div>
                 <div className="menuSlideChangerHolder">
-                    <button className="menuSlideChanger" onClick={() => changeSlide("prev")} style={{ display: currentSlide === 0 ? "none" : "block", left: "10.8%" }}></button>
-                    <button className="menuSlideChanger" onClick={() => changeSlide("next")} style={{ display: currentSlide === slides.length - 1 ? "none" : "block", right: "10.2%" }}></button>
+                    <button className="menuSlideChanger buttonHover" onClick={() => changeSlide("prev")} style={{ display: currentSlide === 0 ? "none" : "block", left: "10.8%" }}></button>
+                    <button className="menuSlideChanger buttonHover" onClick={() => changeSlide("next")} style={{ display: currentSlide === slides.length - 1 ? "none" : "block", right: "10.2%" }}></button>
                 </div>
                 <motion.div className="menuSlidesHolder" initial={{ x: `-${currentSlide * 31}vw` }} animate={{ x: `-${currentSlide * 31}vw` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
                     {slides.map(((slide, index) =>
-                        <motion.button key={index} onClick={() => menuClick(slide.id)} disabled={!slide.unlocked} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} className={`menuSlide ${currentSlide === index ? 'buttonHover' : ''}`} style={{ background: `url(${slide.icon}), radial-gradient(circle, rgba(0, 255, 255) 30%, rgba(0, 190, 255))`, backgroundSize: "cover" }} >
+                        <motion.button key={index} onClick={() => menuClick(slide.id)} disabled={!slide.unlocked} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} className={`menuSlide buttonHover`} style={{ background: `url(${slide.icon}), radial-gradient(circle, rgba(0, 255, 255) 30%, rgba(0, 190, 255))`, backgroundSize: "cover" }} >
                             <AnimatePresence mode="wait">{!slide.unlocked && <motion.div style={{ background: `url(${lockPNG}), radial-gradient(circle, rgba(150, 150, 150) 30%, rgba(100, 100, 100))`, backgroundSize: "cover" }}
                                 animation={{ scale: 1, opacity: 1 }} exit={{ scale: 1.3, opacity: 0 }} transition={{ delay: "0.5", duration: "2" }}></motion.div>}</AnimatePresence>
                         </motion.button>
                     ))}
                 </motion.div>
-                <div className="menuScoreHolder">
+                <div className="menuScoreHolder sway">
                     <AnimateScore scorePrev={gamePrevScore} score={gameTotalScore} setGamePrevScore={setGamePrevScore}></AnimateScore>
                 </div>
             </div>
-
         </>
     );
 }

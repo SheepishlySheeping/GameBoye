@@ -10,9 +10,9 @@ const ScreenBootUp = ({ setVisualEffect, setGameState }) => {
     useEffect(() => {
         const timeout1 = setTimeout(() => {
             setVisualEffect({ variant: "Loading3", duration: "1500" })
-        }, 7000);
+        }, 6600);
 
-        const timeout2 = setTimeout(() => setGameState("gameMenu"), 8400 )
+        const timeout2 = setTimeout(() => setGameState("gameMenu"), 8000 )
 
         return () => {
             clearTimeout(timeout1);
@@ -39,8 +39,8 @@ const ScreenBootUp = ({ setVisualEffect, setGameState }) => {
                             y: ["0", "-5.5vw", "0"],
                         }}
                         transition={{
-                            delay: animationStage === 0 ? 1.5 : 0.5 + (index) * 0.15,
-                            duration:  animationStage === 0 ? 2 : 1,
+                            delay: animationStage === 0 ? 1.5 : 0.5 + (index) * 0.1,
+                            duration:  animationStage === 0 ? 2 : 0.75,
                             ease: "easeInOut",
                         }}
                         onAnimationComplete={ animationStage === 0 ? () => setAnimationStage(1) : null}

@@ -90,6 +90,17 @@ p {
   color: rgba(200, 200, 200);
 }
 
+.clickBlocker {
+  z-index: 5;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.clickBlocker:hover {
+  cursor: url('/src/assets/imgs/cursorwaitPNG.png') 0 0, auto;
+}
+
 .ExitButton {
   position: absolute;
   width: 3vw;
@@ -159,20 +170,39 @@ p {
   }
 }
 
+.sway {
+  animation: swayAnimation 10s infinite linear
+}
+
+@keyframes swayAnimation {
+  0% {
+    transform: rotate(0deg) translate(0.5%, 0.5%) rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg) translate(0.5%, 0.5%) rotate(-90deg);
+  }
+  50% {
+    transform: rotate(180deg) translate(0.5%, 0.5%) rotate(-180deg);
+  }
+  75% {
+    transform: rotate(270deg) translate(0.5%, 0.5%) rotate(-270deg);
+  }
+  100% {
+    transform: rotate(360deg) translate(0.5%, 0.5%) rotate(-360deg);
+}
+}
 .menuTitleHolder {
   width: 100%;
-  height: 12%;
-  background-color: red;
+  height: 12.5%;
+  margin-top: 1.5%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5%;
   font-size: 3rem;
   text-align: center;
 }
 
 .menuSlidesHolder {
-  background-color: green;
   position: relative;
   display: flex;
   align-items: center;
@@ -185,7 +215,6 @@ p {
 
 .menuSlideChangerHolder {
   position: absolute;
-  background-color: orange;
   display: flex;
   align-items: center;
   width: 100%;
@@ -194,8 +223,6 @@ p {
 }
 
 .menuSlideChanger {
-  background-color: red;
-  opacity: 0.5;
   position: absolute;
   z-index: 2;
   width: 13vw;
@@ -219,12 +246,11 @@ p {
 
 .menuScoreHolder {
   width:  100%;
-  background-color: red;
-  height:  12%;
+  height:  12.5%;
+  margin-bottom: 1.5%;
   position:  relative;
   display:  flex;
   align-items: center;
-  margin-top: 1.5%;
   justify-content:  center ;
   font-size :  3.5rem 
 }
@@ -279,18 +305,17 @@ p {
   content: "";
   display: block;
   position: absolute;
-  height: 25vw;
-  width: 25vw;
-  top: 0vw;
-  opacity: 0;
-  border-radius: 25%;
-  background-color: rgba(0, 0, 255, 0.5);
+  top: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
   transform: scale(0);
-  transition: transform 1s ease-out, opacity 0.5s ease-out;
+  opacity: 0  ;
+  transition: transform 1s ease, opacity 0.5s ease;
 }
 
 .buttonHover:hover::before {
-  transform: scale(0.9);
+  transform: scale(1.5);
   opacity: 1;
 }
-

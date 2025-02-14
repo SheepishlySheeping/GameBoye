@@ -26,9 +26,9 @@ const AnimateScore = ({ scorePrev, score, setGamePrevScore }) => {
     return (
         <>
             <p style={{ marginRight: "1%" }}>Total Score:</p>
-                <div>
-                    {String(animatedScore).padStart(6, "0")}
-                </div>
+            <div>
+                {String(animatedScore).padStart(6, "0")}
+            </div>
         </>
     );
 };
