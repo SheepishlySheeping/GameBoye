@@ -4,6 +4,7 @@ import './assets/styles/App.css';
 import VisualEffects from './components/VisualEffects';
 import ScreenMenu from './components/ScreenMenu';
 import ScreenBootUp from './components/ScreenBootUp'
+import ScreenTicTacToe from './components/ScreenTicTacToe'
 import Popup from "./components/Popup";
 import settingsPNG from './assets/imgs/settingsPNG.png'
 import infoPNG from './assets/imgs/infoPNG.png'
@@ -74,7 +75,7 @@ function App() {
           <AnimatePresence mode="wait">
             <motion.button
               disabled={switchState.disabled}
-              className="IOSwitchBar"
+              className={ `IOSwitchBar ${switchState.disabled ? "switchBlocker" : ""}`}
               onClick={handleSwitch}
               variants={SwitchAnimate}
               animate={switchState.on === false ? "off" : "on"}
@@ -96,8 +97,11 @@ function App() {
         <AnimatePresence mode="wait">
           {popupState.variant !== "Off" && <Popup variant={popupState.variant} content={popupState.content} duration={popupState.duration} setPopupState={setPopupState} />}
         </AnimatePresence>
+        {gameState !== "gameBootUp" && gameState!== "gameOff" && <div className="animatedBackground"> </div>}
         {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
-        {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
+        {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setGameState={setGameState} setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
+        {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState}/>}
+        
       </div>
 
       <p className="Bar">

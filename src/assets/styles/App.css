@@ -101,6 +101,10 @@ p {
   cursor: url('/src/assets/imgs/cursorwaitPNG.png') 0 0, auto;
 }
 
+.switchBlocker:hover {
+  cursor: url('/src/assets/imgs/cursorwaitPNG.png') 0 0, auto;
+}
+
 .ExitButton {
   position: absolute;
   width: 3vw;

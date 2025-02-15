@@ -7,7 +7,7 @@ import cursorPNG from '../assets/imgs/cursorPNG.png'
 import cursorclickPNG from '../assets/imgs/cursorclickPNG.png'
 import lockPNG from '../assets/imgs/lockPNG.png'
 
-const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore }) => {
+const ScreenMenu = ({ slides, setSlides, setGameState, setVisualEffect, setClickBlocked, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore }) => {
 
     const [currentSlide, setCurrentSlide] = useState(1);
     const [animationStage, setAnimationStage] = useState(-1);
@@ -16,7 +16,7 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPo
 
     const popupContents = [
         <>
-            <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="ExitButton">X</button>
+            <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="ExitButton buttonHover">X</button>
             <img src={cursorPNG} style={{ width: "50%", height: "30%", marginTop: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }} alt="CursorPNG"></img>
             <img src={cursorclickPNG} style={{ width: "50%", height: "30%", marginTop: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }} alt="CursorClickPNG"></img>
             <p style={{ width: "45%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Normal</p>
@@ -26,7 +26,7 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPo
             <p style={{ width: "90%", height: "44.5%", margin: '2.5% 5%' }}>Created by Sheep</p>
         </>,
         <>
-            <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="ExitButton">X</button>
+            <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="ExitButton buttonHover">X</button>
             <button style={{ width: "100%", height: "5%", marginTop: "5%" }} onClick={() => setVisualEffect({ variant: "HorizontalGlitch", duration: 3000 })}>Glitch me</button>
             <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading1", duration: 3000 })}>Load 1</button>
             <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading2", duration: 3000 })}>Load 2</button>
@@ -59,6 +59,7 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPo
     const menuPopup = {
         1: () => setPopupState({ variant: "Large", content: popupContents[1], duration: 0 }),
         2: () => setPopupState({ variant: "Large", content: popupContents[0], duration: 0 }),
+        3: () => setGameState("gameTicTacToe"),
     };
     const menuClick = (id) => {
         menuPopup[id]?.();
@@ -99,7 +100,6 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setClickBlocked, setPo
 
     return (
         <>
-            <div className="animatedBackground" style={{ width: "100%", height: "100%" }}> </div>
             <div style={{ zIndex: 1, width: "100%", height: "100%" }}>
                 <div className="menuTitleHolder sway"><AnimateString text={gameTotalScore < slides[currentSlide].reqScore ? ("Score " + slides[currentSlide].reqScore + " To Unlock") : (slides[currentSlide].title)} ></AnimateString></div>
                 <div className="menuSlideChangerHolder">
