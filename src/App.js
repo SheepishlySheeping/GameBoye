@@ -43,7 +43,8 @@ function App() {
     { id: 3, title: "Tic Tac Toe", icon: tictactoePNG, reqScore: 0, unlocked: true },
     { id: 4, title: "Tetris", icon: tetrisPNG, reqScore: 1500, unlocked: false },
     { id: 5, title: "Spike Throw", icon: tetrisPNG, reqScore: 2000, unlocked: false },
-    { id: 6, title: "Temp", icon: tetrisPNG, reqScore: 2500, unlocked: false }
+    { id: 6, title: "Temp", icon: tetrisPNG, reqScore: 2500, unlocked: false },
+    { id: 7, title: "Opp", icon: tetrisPNG, reqScore: 2500, unlocked: false }
   ]);
 
   const timeout = useRef(null);
