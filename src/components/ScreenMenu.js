@@ -10,7 +10,6 @@ import lockPNG from '../assets/imgs/lockPNG.png'
 const ScreenMenu = ({ slides, setSlides, setGameState, setVisualEffect, setClickBlocked, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore }) => {
 
     const [currentSlide, setCurrentSlide] = useState(1);
-    const [animationStage, setAnimationStage] = useState(-1);
     const timeouts = useRef([]);
     const timeout1 = useRef(null);
 
@@ -62,7 +61,16 @@ const ScreenMenu = ({ slides, setSlides, setGameState, setVisualEffect, setClick
         3: () => setGameState("gameTicTacToe"),
     };
     const menuClick = (id) => {
-        menuPopup[id]?.();
+        if (id > 2) {
+                setVisualEffect({ variant: "Loading2", duration: "2000" })
+            const timeout = setTimeout(() => menuPopup[id]?.(), 2100 )
+    
+            return () => {
+                clearTimeout(timeout);
+            }
+    
+        }
+        else menuPopup[id]?.();
         clickTimeout();
     }
 
