@@ -98,7 +98,7 @@ function App() {
         <AnimatePresence mode="wait">
           {popupState.variant !== "Off" && <Popup variant={popupState.variant} content={popupState.content} duration={popupState.duration} setPopupState={setPopupState} />}
         </AnimatePresence>
-        {gameState !== "gameBootUp" && gameState!== "gameOff" && <div className="animatedBackground"> <div style={{ backgroundColor: "green", width: '20%', height: '20%', position: 'absolute'}}></div></div>}
+        {gameState !== "gameBootUp" && gameState!== "gameOff" && <div className="animatedBackground"> <div style={{ backgroundColor: "green", width: '10%', height: '10%', position: 'relative'}}></div></div>}
         {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
         {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setGameState={setGameState} setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
         {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState}/>}

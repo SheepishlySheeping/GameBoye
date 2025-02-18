@@ -6,10 +6,8 @@ import { motion } from 'framer-motion';
 const screenTicTacToe = ({ setGameState }) => {
     return (
         <>
-        <button onClick={() => setGameState("gameMenu")} className="ExitButton buttonHover">X</button>
-            <div style={{ width: "100%", height: "30%", backgroundColor: "red", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <p style={{ fontSize: "2rem" }}>Tic Tac Toe</p>
-            </div>
+            <button onClick={() => setGameState("gameMenu")} className="ExitButton buttonHover">X</button>
+            <p style={{ fontSize: "2rem", width: "100%", height: "30%", backgroundColor: "red", display: "flex", alignItems: "center", justifyContent: "center" }}>Tic Tac Toe</p>
         </>
     )
 }
