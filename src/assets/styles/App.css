@@ -166,11 +166,11 @@ p {
 
 @keyframes animateBackground {
   0% {
-    transform: translate(0 , 0);
+    background-position: 0 0;
   }
 
   100% {
-    transform: translate(5.3%, 12%);
+    background-position: 5.3% 12%;
   }
 }
 
