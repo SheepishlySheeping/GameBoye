@@ -33,7 +33,7 @@ const App = () => {
 
   const [switchState, setSwitchState] = useState({ on: false, disabled: false });
   const [clickBlocked, setClickBlocked] = useState(false);
-  const [gameState, setGameState] = useState("gameMenu");
+  const [gameState, setGameState] = useState("gameOff");
   const [gameTotalScore, setGameTotalScore] = useState(0);
   const [gamePrevScore, setGamePrevScore] = useState(0);
   const [visualEffect, setVisualEffect] = useState({ variant: "Off", duration: 0 });
