@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/gameboye/static/css/main.ba0e8bf4.css",
-    "main.js": "/gameboye/static/js/main.ce01294f.js",
-    "static/js/488.fdf3edd7.chunk.js": "/gameboye/static/js/488.fdf3edd7.chunk.js",
-    "static/media/plasticPNG.png": "/gameboye/static/media/plasticPNG.e9b5226040bbc6036ab2.png",
-    "static/media/Minecraft.ttf": "/gameboye/static/media/Minecraft.81f6c7f882fcc2dee106.ttf",
-    "index.html": "/gameboye/index.html",
-    "main.ba0e8bf4.css.map": "/gameboye/static/css/main.ba0e8bf4.css.map",
-    "main.ce01294f.js.map": "/gameboye/static/js/main.ce01294f.js.map",
-    "488.fdf3edd7.chunk.js.map": "/gameboye/static/js/488.fdf3edd7.chunk.js.map"
+    "main.css": "/GameBoye/static/css/main.a45399e1.css",
+    "main.js": "/GameBoye/static/js/main.804440f6.js",
+    "static/js/488.fdf3edd7.chunk.js": "/GameBoye/static/js/488.fdf3edd7.chunk.js",
+    "static/media/plasticPNG.png": "/GameBoye/static/media/plasticPNG.e9b5226040bbc6036ab2.png",
+    "static/media/Minecraft.ttf": "/GameBoye/static/media/Minecraft.81f6c7f882fcc2dee106.ttf",
+    "index.html": "/GameBoye/index.html",
+    "main.a45399e1.css.map": "/GameBoye/static/css/main.a45399e1.css.map",
+    "main.804440f6.js.map": "/GameBoye/static/js/main.804440f6.js.map",
+    "488.fdf3edd7.chunk.js.map": "/GameBoye/static/js/488.fdf3edd7.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba0e8bf4.css",
-    "static/js/main.ce01294f.js"
+    "static/css/main.a45399e1.css",
+    "static/js/main.804440f6.js"
   ]
 }
