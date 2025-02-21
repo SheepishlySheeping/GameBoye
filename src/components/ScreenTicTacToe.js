@@ -7,9 +7,7 @@ const screenTicTacToe = ({ setGameState }) => {
     return (
         <>
             <button onClick={() => setGameState("gameMenu")} className="ExitButton buttonHover">X</button>
-            <p>dsadsadsa</p>
-            <div>dsads</div>
-            <p style={{ fontSize: "2rem", width: "100%", height: "30%", backgroundColor: "red", display: "flex", alignItems: "center", justifyContent: "center" }}>Tic Tac Toe</p>
+            <p className="sway" style={{ fontSize: "2rem", width: "100%", height: "30%", backgroundColor: "", display: "flex", alignItems: "center", justifyContent: "center" }}>Tic Tac Toe</p>
         </>
     )
 }

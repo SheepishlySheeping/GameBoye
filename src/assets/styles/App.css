@@ -153,24 +153,37 @@ p {
 }
 
 .animatedBackground {
-  animation: animateBackground 5s linear infinite;
+  animation: animateBackground 15s linear infinite;
   z-index: 0;
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 200%;
+  height: 200%;
+  top: -80%;
+  left: -80%;
   background:
     linear-gradient(90deg, rgba(0, 255, 255, 0.15) 5%, transparent 1%),
     linear-gradient(0deg, rgba(0, 255, 255, 0.15) 5%, transparent 1%);
-  background-size: 5% 11%;
+  background-size: 7vw 7vw;
+}
+
+.animatedBackgroundPattern {
+  position: absolute;
+  width: 6vw;
+  height: 6vw;
+  opacity: 0.15;
+  filter: brightness(0) saturate(100%) invert(86%) sepia(96%) saturate(1937%) hue-rotate(104deg) brightness(107%) contrast(104%);
 }
 
 @keyframes animateBackground {
   0% {
-    background-position: 0 0;
+    /* background-position: 0 0; */
+    transform: translate(0, 0);
+
   }
 
   100% {
-    background-position: 5.3% 12%;
+    /* background-position: 5.3% 12%; */
+    transform: translate(28vw, 28vw);
   }
 }
 

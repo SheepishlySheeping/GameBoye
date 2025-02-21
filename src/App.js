@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import './assets/styles/App.css';
+import AnimatedBackground from "./components/AnimatedBackground";
 import VisualEffects from './components/VisualEffects';
 import ScreenMenu from './components/ScreenMenu';
 import ScreenBootUp from './components/ScreenBootUp'
@@ -28,11 +29,11 @@ const SwitchAnimate = {
   },
 };
 
-function App() {
+const App = () => {
 
   const [switchState, setSwitchState] = useState({ on: false, disabled: false });
   const [clickBlocked, setClickBlocked] = useState(false);
-  const [gameState, setGameState] = useState("gameOff");
+  const [gameState, setGameState] = useState("gameMenu");
   const [gameTotalScore, setGameTotalScore] = useState(0);
   const [gamePrevScore, setGamePrevScore] = useState(0);
   const [visualEffect, setVisualEffect] = useState({ variant: "Off", duration: 0 });
@@ -98,7 +99,7 @@ function App() {
         <AnimatePresence mode="wait">
           {popupState.variant !== "Off" && <Popup variant={popupState.variant} content={popupState.content} duration={popupState.duration} setPopupState={setPopupState} />}
         </AnimatePresence>
-        {gameState !== "gameBootUp" && gameState!== "gameOff" && <div className="animatedBackground"> <div style={{ backgroundColor: "green", width: '10%', height: '10%', position: 'relative'}}></div></div>}
+        {gameState !== "gameBootUp" && gameState!== "gameOff" && <AnimatedBackground  gameState={gameState} />}
         {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
         {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setGameState={setGameState} setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
         {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState}/>}
