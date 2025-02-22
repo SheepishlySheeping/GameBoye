@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import './assets/styles/App.css';
 import AnimatedBackground from "./components/AnimatedBackground";
@@ -31,6 +31,7 @@ const SwitchAnimate = {
 
 const App = () => {
 
+  const [horizontalView, setHorizontalView] = useState(true);
   const [switchState, setSwitchState] = useState({ on: false, disabled: false });
   const [clickBlocked, setClickBlocked] = useState(false);
   const [gameState, setGameState] = useState("gameOff");
@@ -49,6 +50,13 @@ const App = () => {
   ]);
 
   const timeout = useRef(null);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerHeight > window.innerWidth) setHorizontalView(false);
+      else setHorizontalView(true);
+    })
+  },[])
 
   const handleSwitch = () => {
 
@@ -71,45 +79,52 @@ const App = () => {
 
 
   return (
-    <div className="App">
-      <div className="BarTop">
-        <div className="IOSwitch">
-          <AnimatePresence mode="wait">
-            <motion.button
-              disabled={switchState.disabled}
-              className={ `IOSwitchBar ${switchState.disabled ? "switchBlocker" : ""}`}
-              onClick={handleSwitch}
-              variants={SwitchAnimate}
-              animate={switchState.on === false ? "off" : "on"}
-              exit="off"
-            >
-              <p>O</p>
-              <div></div>
-              <p>I</p>
-            </motion.button>
-          </AnimatePresence>
+    <>
+      {horizontalView && (<div className="App">
+        <div className="BarTop">
+          <div className="IOSwitch">
+            <AnimatePresence mode="wait">
+              <motion.button
+                disabled={switchState.disabled}
+                className={`IOSwitchBar ${switchState.disabled ? "switchBlocker" : ""}`}
+                onClick={handleSwitch}
+                variants={SwitchAnimate}
+                animate={switchState.on === false ? "off" : "on"}
+                exit="off"
+              >
+                <p>O</p>
+                <div></div>
+                <p>I</p>
+              </motion.button>
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
 
-      <div className="Box" style={{ backgroundColor: gameState === "gameBootUp" ? "rgba(15, 15, 15)" : "rgba(100, 100, 255)" }}>
-        <div className="clickBlocker" style={{ pointerEvents: clickBlocked === true ? "all" : "none", backgroundColor: gameState === "gameOff" ? "rgba(0, 0, 0)" : "rgba(0, 0, 0, 0)" }}> </div>
-        <AnimatePresence mode="wait">
-          {visualEffect.variant !== "Off" && <VisualEffects variant={visualEffect.variant} duration={visualEffect.duration} setVisualEffect={setVisualEffect} />}
-        </AnimatePresence>
-        <AnimatePresence mode="wait">
-          {popupState.variant !== "Off" && <Popup variant={popupState.variant} content={popupState.content} duration={popupState.duration} setPopupState={setPopupState} />}
-        </AnimatePresence>
-        {gameState !== "gameBootUp" && gameState!== "gameOff" && <AnimatedBackground  gameState={gameState} />}
-        {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
-        {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setGameState={setGameState} setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
-        {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState}/>}
-        
-      </div>
+        <div className="Box" style={{ backgroundColor: gameState === "gameBootUp" ? "rgba(15, 15, 15)" : "rgba(100, 100, 255)" }}>
+          <div className="clickBlocker" style={{ pointerEvents: clickBlocked === true ? "all" : "none", backgroundColor: gameState === "gameOff" ? "rgba(0, 0, 0)" : "rgba(0, 0, 0, 0)" }}> </div>
+          <AnimatePresence mode="wait">
+            {visualEffect.variant !== "Off" && <VisualEffects variant={visualEffect.variant} duration={visualEffect.duration} setVisualEffect={setVisualEffect} />}
+          </AnimatePresence>
+          <AnimatePresence mode="wait">
+            {popupState.variant !== "Off" && <Popup variant={popupState.variant} content={popupState.content} duration={popupState.duration} setPopupState={setPopupState} />}
+          </AnimatePresence>
+          {gameState !== "gameBootUp" && gameState !== "gameOff" && <AnimatedBackground gameState={gameState} />}
+          {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
+          {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setGameState={setGameState} setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
+          {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState} />}
 
-      <p className="Bar">
-        GAMEBOYE
-      </p>
-    </div>
+        </div>
+
+        <p className="Bar">
+          GAMEBOYE
+        </p>
+      </div>)}
+      {!horizontalView && (<div style={{ display: "flex", height: "100vh", width: "100vw", alignItems: "center", justifyContent: "center", flexDirection: "column", backgroundColor: "black", color: "white"}}>
+        <p style={{ fontSize: "3rem"}}>Portrait Mode is Not Supported!</p>
+        <p style={{ marginTop: "5%", fontSize: "1.5rem" }}>(make sure the window's width is larger than its height)</p>
+        <button onClick={() => setHorizontalView(true)} style={{ position: "absolute", bottom: "5%", right: "5%", color: "crimson", width: "10%", height: "5%"}}>ignore</button>
+      </div>)}
+    </>
   );
 }
 
