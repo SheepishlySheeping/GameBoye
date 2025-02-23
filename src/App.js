@@ -34,7 +34,7 @@ const App = () => {
   const [horizontalView, setHorizontalView] = useState(true);
   const [switchState, setSwitchState] = useState({ on: false, disabled: false });
   const [clickBlocked, setClickBlocked] = useState(false);
-  const [gameState, setGameState] = useState("gameOff");
+  const [gameState, setGameState] = useState("gameTicTacToe");
   const [gameTotalScore, setGameTotalScore] = useState(0);
   const [gamePrevScore, setGamePrevScore] = useState(0);
   const [visualEffect, setVisualEffect] = useState({ variant: "Off", duration: 0 });
