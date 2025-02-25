@@ -22,6 +22,7 @@ const screenTicTacToe = ({ setGameState }) => {
                                     </motion.div>
                                 ))}
             </div>
+            <div>please end my life</div>
         </>
     )
 }
