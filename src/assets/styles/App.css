@@ -136,7 +136,6 @@ p {
   margin: 0 2.5%;
   background-color: rgba(100, 100, 255);
   border-radius: 10%;
-  display: flex;
   position: relative;
   font-family: 'Minecraft', sans-serif;
   overflow: hidden;

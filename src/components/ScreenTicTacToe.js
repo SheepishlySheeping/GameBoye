@@ -10,7 +10,7 @@ const screenTicTacToe = ({ setGameState }) => {
     return (
         <>
             <button onClick={() => setGameState("gameMenu")} className="buttonHover" style={{ position: "absolute", width: "5vw", height: "3vw", top: "5vw", right: "5vw", zIndex: "3" }}>X</button>
-            <div className="menuTitleHolder sway" style={{ backgroundColor: "red", marginTop: "3%"}} >
+            <div className="menuTitleHolder sway" style={{ backgroundColor: "red", marginTop: "3%", width: "100%"}} >
                 {name.map((a, index) => (
                                     <motion.div
                                         key={index}
@@ -22,7 +22,7 @@ const screenTicTacToe = ({ setGameState }) => {
                                     </motion.div>
                                 ))}
             </div>
-            <div>
+            <div style={{backgroundColor: "blue", width: "100%", height: "30%", marginTop: "15%", position: "relative"}}>
                 <button>
                     one
                 </button>
