@@ -7,11 +7,10 @@ import cursorPNG from '../assets/imgs/cursorPNG.png'
 import cursorclickPNG from '../assets/imgs/cursorclickPNG.png'
 import lockPNG from '../assets/imgs/lockPNG.png'
 
-const ScreenMenu = ({ slides, setSlides, setGameState, setVisualEffect, setClickBlocked, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore }) => {
+const ScreenMenu = ({ slides, setSlides, setVisualEffect, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore, blockScreen, changeScreen }) => {
 
     const [currentSlide, setCurrentSlide] = useState(1);
     const timeouts = useRef([]);
-    const timeout1 = useRef(null);
 
     const popupContents = [
         <>
@@ -42,41 +41,23 @@ const ScreenMenu = ({ slides, setSlides, setGameState, setVisualEffect, setClick
     const changeSlide = (direction) => {
         if (direction === "prev") setCurrentSlide(currentSlide - 1);
         if (direction === "next") setCurrentSlide(currentSlide + 1);
-        clickTimeout();
-    };
-
-    const clickTimeout = () => {
-        if (timeout1.current) {
-            clearTimeout(timeout1.current);
-        }
-        setClickBlocked(true);
-        timeout1.current = setTimeout(() => {
-            setClickBlocked(false);
-        }, 550);
+        blockScreen(550)
     };
 
     const menuPopup = {
         1: () => setPopupState({ variant: "Large", content: popupContents[1], duration: 0 }),
         2: () => setPopupState({ variant: "Large", content: popupContents[0], duration: 0 }),
-        3: () => setGameState("gameTicTacToe"),
     };
     const menuClick = (id) => {
-        if (id > 2) {
-                setVisualEffect({ variant: "Loading2", duration: "2000" })
-            const timeout = setTimeout(() => menuPopup[id]?.(), 2100 )
-    
-            return () => {
-                clearTimeout(timeout);
-            }
-    
+        if (id === 3) {
+            changeScreen("Loading2", 2000, "gameTicTacToe")
         }
         else menuPopup[id]?.();
-        clickTimeout();
+        blockScreen(550)
     }
 
     useEffect(() => {
 
-        setClickBlocked(true);
         let tempSlides = [...slides];
         let toUnlock = [];
 
@@ -96,12 +77,9 @@ const ScreenMenu = ({ slides, setSlides, setGameState, setVisualEffect, setClick
             timeouts.current.push(tempTimeout);
         });
 
-        const timeout = setTimeout(() => {
-            setClickBlocked(false);
-        }, toUnlock.length * 2000);
+        blockScreen(toUnlock.length * 2000)
 
         return () => {
-            clearTimeout(timeout);
             timeouts.current.forEach((timeout) => clearTimeout(timeout));
         }
     }, [gameTotalScore])

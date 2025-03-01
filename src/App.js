@@ -7,6 +7,8 @@ import ScreenMenu from './components/ScreenMenu';
 import ScreenBootUp from './components/ScreenBootUp'
 import ScreenTicTacToe from './components/ScreenTicTacToe'
 import Popup from "./components/Popup";
+import ScreenBlock from "./hooks/ScreenBlock";
+import ScreenChange from "./hooks/ScreenChange";
 import settingsPNG from './assets/imgs/settingsPNG.png'
 import infoPNG from './assets/imgs/infoPNG.png'
 import tictactoePNG from './assets/imgs/tictactoePNG.png'
@@ -75,7 +77,10 @@ const App = () => {
       setPopupState({ variant: "Off", content: "", duration: 0 });
       setVisualEffect({ variant: "Off", duration: 0 });
     }
-  };
+  }
+
+  const { blockScreen, blockCleanup } = ScreenBlock( clickBlocked, setClickBlocked)
+  const { changeScreen, changeCleanup} = ScreenChange( setGameState, setVisualEffect)
 
 
   return (
@@ -109,9 +114,9 @@ const App = () => {
             {popupState.variant !== "Off" && <Popup variant={popupState.variant} content={popupState.content} duration={popupState.duration} setPopupState={setPopupState} />}
           </AnimatePresence>
           {gameState !== "gameBootUp" && gameState !== "gameOff" && <AnimatedBackground gameState={gameState} />}
-          {gameState === "gameBootUp" && <ScreenBootUp setVisualEffect={setVisualEffect} setGameState={setGameState} />}
-          {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setGameState={setGameState} setVisualEffect={setVisualEffect} setClickBlocked={setClickBlocked} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} />}
-          {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState} />}
+          {gameState === "gameBootUp" && <ScreenBootUp changeScreen={changeScreen} />}
+          {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setVisualEffect={setVisualEffect} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} blockScreen={blockScreen} changeScreen={changeScreen} />}
+          {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState} blockScreen={blockScreen} changeScreen={changeScreen} />}
 
         </div>
 

@@ -4,19 +4,16 @@ import { motion } from 'framer-motion';
 
 const name = ["G", "A", "M", "E", "B", "O", "Y", "E"];
 
-const ScreenBootUp = ({ setVisualEffect, setGameState }) => {
+const ScreenBootUp = ({ changeScreen }) => {
     const [animationStage, setAnimationStage] = useState(0);
 
     useEffect(() => {
-        const timeout1 = setTimeout(() => {
-            setVisualEffect({ variant: "Loading3", duration: "1500" })
+        const timeout = setTimeout(() => {
+            changeScreen("Loading3", 1500, "gameMenu")
         }, 6600);
 
-        const timeout2 = setTimeout(() => setGameState("gameMenu"), 8000 )
-
         return () => {
-            clearTimeout(timeout1);
-            clearTimeout(timeout2);
+            clearTimeout(timeout);
         }
 
     }, []);

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import '../assets/styles/App.css';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import xPNG from '../assets/imgs/xPNG.png';
 import oPNG from '../assets/imgs/oPNG.png';
 
 const name = ["T", "I", "C", "T", "A", "C", "T", "O", "E"];
 
-const ScreenTicTacToe = ({ setGameState }) => {
+const ScreenTicTacToe = ({ setGameState, blockScreen, changeScreen }) => {
     const [boardSize, setBoardSize] = useState(null);
     const [difficulty, setDifficulty] = useState(null);
 
     const handleClick = (mode) => {
+        blockScreen(1000);
         if (mode == null) {
             setBoardSize(mode);
             setDifficulty(mode);
@@ -23,7 +24,7 @@ const ScreenTicTacToe = ({ setGameState }) => {
 
     return (
         <>
-            <button onClick={() => setGameState("gameMenu")} className="buttonHover" style={{ position: "absolute", width: "5vw", height: "3vw", top: "5vw", right: "5vw", zIndex: "3" }}>X</button>
+            <button onClick={() => changeScreen("Loading2", 2000, "gameMenu")} className="buttonHover" style={{ position: "absolute", width: "5vw", height: "3vw", top: "5vw", right: "5vw", zIndex: "3" }}>X</button>
             <div className="menuTitleHolder sway" style={{ backgroundColor: "red", marginTop: "3%", width: "100%" }} >
                 {name.map((a, index) => (
                     <motion.div
@@ -36,7 +37,8 @@ const ScreenTicTacToe = ({ setGameState }) => {
                     </motion.div>
                 ))}
             </div>
-            <motion.div animate={{x : boardSize == null ? [0, 100] : [-100, 0]}} transition={{ duration: 1.5, ease: 'easeInOut' }} className="sway" style={{ backgroundColor: "blue", width: "100%", height: "35%", marginTop: "15%", position: "relative", display: "flex", flexWrap: "wrap" }}>
+            <AnimatePresence mode="wait">
+            <motion.div key={boardSize} initial={{ x: boardSize == null ? "-100vw" : "100vw" }} animate={{ x: 0 }} exit={{ x: boardSize == null ? "-100vw" : "100vw" }} transition={{ duration: 1, ease: 'easeInOut' }} className="" style={{ backgroundColor: "blue", width: "100%", height: "35%", marginTop: "15%", position: "relative", display: "flex", flexWrap: "wrap" }}>
                 <button onClick={() => handleClick(boardSize == null ? "3x3" : "PVP")} style={{ width: "23.33%", height: "68%", margin: "1% 5%", backgroundColor: "orange" }}>
                     {boardSize == null ? "3x3" : "PVP"}
                 </button>
@@ -48,6 +50,7 @@ const ScreenTicTacToe = ({ setGameState }) => {
                 </button>
                 {boardSize !== null && <button onClick={() => handleClick(null)} style={{ height: "30%", width: "20%", backgroundColor: "peachpuff", opacity: "50%" }}>Back</button>}
             </motion.div>
+            </AnimatePresence>
         </>
     )
 }
