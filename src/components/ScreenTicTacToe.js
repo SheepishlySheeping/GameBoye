@@ -24,7 +24,7 @@ const ScreenTicTacToe = ({ setGameState, blockScreen, changeScreen }) => {
 
     return (
         <>
-            <button onClick={() => changeScreen("Loading2", 2000, "gameMenu")} className="buttonHover" style={{ position: "absolute", width: "5vw", height: "3vw", top: "5vw", right: "5vw", zIndex: "3" }}>X</button>
+            <button onClick={() => changeScreen("Loading2", 2000, "gameMenu")} className="buttonHover" style={{backgroundColor: "rgba(0, 255, 255)", position: "absolute", width: "5vw", height: "3vw", top: "5vw", right: "5vw", zIndex: "3" }}>X</button>
             <div className="menuTitleHolder sway" style={{ backgroundColor: "red", marginTop: "3%", width: "100%" }} >
                 {name.map((a, index) => (
                     <motion.div
