@@ -334,3 +334,10 @@ p {
   transform: scale(1.5);
   opacity: 1;
 }
+
+.quitButton::after {
+  content: "QUIT";
+  position: absolute;
+  bottom: 13%;
+  right: 15%;
+}
