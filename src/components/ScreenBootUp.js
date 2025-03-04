@@ -15,7 +15,6 @@ const ScreenBootUp = ({ changeScreen }) => {
         return () => {
             clearTimeout(timeout);
         }
-
     }, []);
 
     return (

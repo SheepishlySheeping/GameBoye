@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from "react";
 import '../assets/styles/App.css';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, easeInOut, motion } from 'framer-motion';
 import xPNG from '../assets/imgs/xPNG.png';
 import oPNG from '../assets/imgs/oPNG.png';
 
-const name = ["T", "I", "C", "T", "A", "C", "T", "O", "E"];
+const name = ["TIC", "TAC", "TOE"];
 
 const ScreenTicTacToe = ({ blockScreen, changeScreen }) => {
-    const [curAction, setCurAction] = useState("setSize");
+    const [curAction, setCurAction] = useState("intro");
     const [boardSize, setBoardSize] = useState(null);
     const [difficulty, setDifficulty] = useState(null);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setCurAction("setSize");
+        }, 4000);
+
+        return () => {
+            clearTimeout(timeout);
+        }
+    }, []);
 
     const handleClick = (mode) => {
         blockScreen(1000);
@@ -33,17 +43,31 @@ const ScreenTicTacToe = ({ blockScreen, changeScreen }) => {
     return (
         <>
             <button onClick={() => changeScreen("Loading2", 2000, "gameMenu")} className="buttonHover quitButton" style={{ backgroundColor: "rgba(0, 255, 255)", position: "absolute", width: "10vw", height: "10vw", top: "-5vw", left: "-4vw", zIndex: "3", borderRadius: "40%" }}></button>
-            <div className="menuTitleHolder sway" style={{ backgroundColor: "red", marginTop: "3%", width: "100%" }} >
+            <div className={`menuTitleHolder ${(curAction === "setSize" || curAction === "setDif") ? 'sway' : ''}`} style={{ marginTop: "3%", width: "100%" }} >
                 {name.map((a, index) => (
                     <motion.div
                         key={index}
                         style={{
-                            fontSize: "5rem"
+                            fontSize: "5rem",
+                        }}
+                        initial={{
+                            opacity: 0,
+                            y: "-10vh",
+                        }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                        }}
+                        transition={{
+                            duration: 1,
+                            delay: 1 + (index) * 0.5,
+                            ease: "easeInOut",
                         }}
                     >
                         {a}
                     </motion.div>
                 ))}
+                <motion.div className="tttSlash"></motion.div>
             </div>
             <AnimatePresence mode="wait">
                 {(curAction === "setSize" || curAction === "setDif") &&
@@ -51,7 +75,7 @@ const ScreenTicTacToe = ({ blockScreen, changeScreen }) => {
                         <button onClick={() => handleClick(boardSize == null ? "3x3" : "PVP")} style={{ width: "23.33%", height: "68%", margin: "1% 5%", backgroundColor: "orange" }}>
                             {boardSize == null ? "3x3" : "PVP"}
                         </button>
-                        <button onClick={() => handleClick(boardSize == null ? "6x6" : "Normal")} className="buttonHover" style={{ width: "23.33%", height: "68%", margin: "1% 5%", backgroundColor: "purple" }}>
+                        <button onClick={() => handleClick(boardSize == null ? "6x6" : "Normal")} className="buttonHover" style={{ position: "relative", width: "23.33%", height: "68%", margin: "1% 5%", backgroundColor: "purple" }}>
                             {boardSize == null ? "6x6" : "Normal"}
                         </button>
                         <button onClick={() => handleClick(boardSize == null ? "9x9" : "Hard")} style={{ width: "23.33%", height: "68%", margin: "1% 5%", backgroundColor: "orange" }}>
