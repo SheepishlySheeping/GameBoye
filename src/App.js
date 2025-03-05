@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import './assets/styles/App.css';
 import AnimatedBackground from "./components/AnimatedBackground";
@@ -13,23 +13,6 @@ import settingsPNG from './assets/imgs/settingsPNG.png'
 import infoPNG from './assets/imgs/infoPNG.png'
 import tictactoePNG from './assets/imgs/tictactoePNG.png'
 import tetrisPNG from './assets/imgs/tetrisPNG.png'
-
-const SwitchAnimate = {
-  off: {
-    x: "0%",
-    transition: {
-      duration: 0.2,
-      ease: 'easeInOut',
-    },
-  },
-  on: {
-    x: "25%",
-    transition: {
-      duration: 0.2,
-      ease: 'easeInOut',
-    },
-  },
-};
 
 const App = () => {
 
@@ -71,22 +54,20 @@ const App = () => {
     }
   }
 
-  const { blockScreen, blockCleanup } = ScreenBlock(clickBlocked, setClickBlocked)
-  const { changeScreen, changeCleanup } = ScreenChange(setGameState, setVisualEffect)
-
+  const { blockScreen } = ScreenBlock(clickBlocked, setClickBlocked)
+  const { changeScreen } = ScreenChange(setGameState, setVisualEffect)
 
   return (
     <div className="App">
-      <div style={{ width: "100vw", height: "7.5vh", display: "flex", alignItems: "center"}}>
-        <div className="IOSwitch">
+      <div className="App_bar Flex_center" style={{ width: "100%", height: "7.5%", justifyContent: "unset"}}>
+        <div className="IO_switch">
           <AnimatePresence mode="wait">
             <motion.button
               disabled={switchState.disabled}
-              className={`IOSwitchBar ${switchState.disabled ? "switchBlocker" : ""}`}
+              className={`Flex_center ${switchState.disabled ? "IO_switch_blocker" : ""}`}
               onClick={handleSwitch}
-              variants={SwitchAnimate}
-              animate={switchState.on === false ? "off" : "on"}
-              exit="off"
+              animate={switchState.on === false ? {x: 0} : {x: "26%"}}
+              transition={{duration: 0.2, ease: "easeInOut" }}
             >
               <p>O</p>
               <div></div>
@@ -96,8 +77,8 @@ const App = () => {
         </div>
       </div>
 
-      <div className="Box" style={{ backgroundColor: gameState === "gameBootUp" ? "rgba(15, 15, 15)" : "rgba(100, 100, 255)" }}>
-        <div className="clickBlocker" style={{ pointerEvents: clickBlocked === true ? "all" : "none", backgroundColor: gameState === "gameOff" ? "rgba(0, 0, 0)" : "rgba(0, 0, 0, 0)" }}> </div>
+      <div className="App_box" style={{ backgroundColor: gameState === "gameBootUp" ? "rgba(15, 15, 15)" : "rgba(100, 100, 255)" }}>
+        <div className="App_clickblocker" style={{ pointerEvents: clickBlocked === true ? "all" : "none", opacity: gameState === "gameOff" ? "100%" : 0 }}></div>
         <AnimatePresence mode="wait">
           {visualEffect.variant !== "Off" && <VisualEffects variant={visualEffect.variant} duration={visualEffect.duration} setVisualEffect={setVisualEffect} />}
         </AnimatePresence>
@@ -110,7 +91,7 @@ const App = () => {
         {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState} blockScreen={blockScreen} changeScreen={changeScreen} />}
       </div>
 
-      <p className="Bar">
+      <p className="App_bar_title App_bar Flex_center">
         GAMEBOYE
       </p>
     </div>

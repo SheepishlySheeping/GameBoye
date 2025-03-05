@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 const ScreenBlock = (clickBlocked, setClickBlocked) => {
   const timeoutRef = useRef(null);
