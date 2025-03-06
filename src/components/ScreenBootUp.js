@@ -9,7 +9,7 @@ const ScreenBootUp = ({ changeScreen }) => {
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            changeScreen("Loading3", 1500, "gameMenu")
+            changeScreen("Loading3", "gameMenu")
         }, 6600);
 
         return () => {
@@ -19,11 +19,11 @@ const ScreenBootUp = ({ changeScreen }) => {
 
     return (
         <>
-            <div className="bootupHolder">
+            <div className="Flex_center" style={{height: "100%", width: "100%"}}>
                 {name.map((a, index) => (
                     <motion.div
                         key={index}
-                        className="bootupBoxes"
+                        className="Bootup_squares"
                         initial={{
                             opacity: 0,
                         }}
@@ -32,7 +32,7 @@ const ScreenBootUp = ({ changeScreen }) => {
                         } : 
                         {
                             opacity: 1,
-                            y: ["0", "-5.5vw", "0"],
+                            y: ["0", "-7vmin", "0"],
                         }}
                         transition={{
                             delay: animationStage === 0 ? 1.5 : 0.5 + (index) * 0.1,

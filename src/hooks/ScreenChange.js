@@ -1,23 +1,19 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
-const ScreenChange = ( setGameState, setVisualEffect) => {
+const ScreenChange = (setGameState, setVisualEffect) => {
   const timeoutRef = useRef(null);
 
-
-  const changeScreen = (style, duration, target) => {
+  const changeScreen = (style, target) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    
-   
 
     timeoutRef.current = setTimeout(() => {
       setGameState(target)
-    }, duration);
+    }, 2000);
 
-    setVisualEffect({ variant: style, duration: duration + 500 })
+    setVisualEffect({ variant: style, duration: 2500 })
   };
-  
 
   const changeCleanup = () => {
     if (timeoutRef.current) {

@@ -2,17 +2,6 @@ import React, { useEffect, useState } from "react";
 import '../assets/styles/App.css';
 import { motion } from 'framer-motion';
 
-const animateSquares = {
-    hidden: {
-        opacity: 0,
-        scale: 0,
-    },
-    visible: {
-        opacity: 1,
-        scale: 1,
-    }
-}
-
 const VisualEffects = ({ variant, duration, setVisualEffect }) => {
 
     const [variables, setVariables] = useState({
@@ -63,20 +52,17 @@ const VisualEffects = ({ variant, duration, setVisualEffect }) => {
     }, [])
 
     return (
-        <div className="visualEffectsOverlay">
+        <div className="Vfx_overlay">
             {variant === "HorizontalGlitch" && (
                 <div>
                     {[variables.vars1[0], variables.vars1[1], variables.vars1[2], variables.vars1[3]].map(
                         (pos, index) => (
                             <div
                                 key={index}
+                                className="Vfx_glitchbar"
                                 style={{
-                                    backgroundColor: "black",
-                                    width: "100%",
                                     height: variables.vars2[index],
-                                    opacity: "0.15",
                                     top: pos,
-                                    position: "absolute",
                                 }}
                             ></div>
                         )
@@ -84,27 +70,14 @@ const VisualEffects = ({ variant, duration, setVisualEffect }) => {
                 </div>
             )}
             {variant.startsWith("Loading") && (
-                <div
-                    style={{
-                        pointerEvents: "all",
-                        display: "flex",
-                        width: "100%",
-                        height: "100%",
-                        flexWrap: "wrap",
-                    }}
-                >
+                <div className="Vfx_loading_grid">
                     {squares.map((a, index) => (
                         <motion.div
                             key={index}
-                            style={{
-                                backgroundColor: "rgba(15, 15, 15)",
-                                width: "10%",
-                                height: "20%",
-                            }}
-                            variants={animateSquares}
-                            initial="hidden"
-                            animate="visible"
-                            exit="hidden"
+                            className="Vfx_loading_squares"
+                            initial={{opacity: 0, scale: 0}}
+                            animate={{opacity: 1, scale: 1}}
+                            exit={{opacity: 0, scale: 0}}
                             transition={{
                                 delay: a * 0.1,
                                 duration: 0.5,

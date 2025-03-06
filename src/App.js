@@ -51,11 +51,12 @@ const App = () => {
     if (gameState !== "Off") {
       setPopupState({ variant: "Off", content: "", duration: 0 });
       setVisualEffect({ variant: "Off", duration: 0 });
+      changeCleanup();
     }
   }
 
   const { blockScreen } = ScreenBlock(clickBlocked, setClickBlocked)
-  const { changeScreen } = ScreenChange(setGameState, setVisualEffect)
+  const { changeScreen, changeCleanup } = ScreenChange(setGameState, setVisualEffect)
 
   return (
     <div className="App">

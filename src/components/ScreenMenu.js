@@ -50,7 +50,7 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setPopupState, gameTot
     };
     const menuClick = (id) => {
         if (id === 3) {
-            changeScreen("Loading2", 2000, "gameTicTacToe")
+            changeScreen("Loading2", "gameTicTacToe")
         }
         else menuPopup[id]?.();
         blockScreen(550)

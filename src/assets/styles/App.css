@@ -51,7 +51,7 @@ p {
 }
 
 .App_bar_title {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: bolder;
   font-style: italic;
   color: rgba(130, 130, 130);
@@ -120,6 +120,44 @@ p {
 
 .App_clickblocker:hover {
   cursor: url('/src/assets/imgs/cursorwaitPNG.png') 0 0, auto;
+}
+
+.Bootup_squares {
+  background-color: rgba(255, 255, 255);
+  height: 10vmin;
+  width: 10vmin;
+  margin: 0 0.5vmin;
+  font-size: 11rem;
+  text-align: center;
+}
+
+.Vfx_overlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.Vfx_glitchbar{
+  width: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0);
+  opacity: 0.15;
+}
+
+.Vfx_loading_grid {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  pointer-events: all;
+}
+
+.Vfx_loading_squares {
+  height: 20%;
+  width: 10%;
+  background-color: rgba(15, 15, 15);
 }
 
 .ExitButton {
@@ -279,33 +317,6 @@ p {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0)
-}
-
-.bootupHolder {
-  position: absolute;
-  width: 100%;
-  height: 20%;
-  top: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.bootupBoxes {
-  background-color: rgba(255, 255, 255);
-  width: 8vw;
-  height: 8vw;
-  margin: 0 0.5vw;
-  font-size: 9.5rem;
-  text-align: center;
-}
-
-.visualEffectsOverlay {
-  width: 100%;
-  height: 100%; 
-  position: absolute;
-  pointer-events: none;
-  z-index: 4;
 }
 
 .buttonHover {
