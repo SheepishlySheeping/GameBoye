@@ -19,9 +19,9 @@ const Popup = ({ variant, content, duration, setPopupState }) => {
     return (
         <>
             {variant !== "Off" && (<div>
-                <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} transition={{ duration: 0.5, ease: 'easeInOut'}} className="PopupContainer"></motion.div>
-                <motion.div initial={{scale: 0}} animate={{scale: 1}} exit={{scale: 0}} transition={{ duration: 0.5, ease: 'easeInOut'}} className="Popup">
-                    <div className="PopupContent" style={{ width: variant === "Large" ? "50%" : "30%", height: variant === "Large" ? "70%" : "50%" }}>
+                <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} transition={{ duration: 0.5, ease: 'easeInOut'}} className="Popup_background"></motion.div>
+                <motion.div initial={{scale: 0}} animate={{scale: 1}} exit={{scale: 0}} transition={{ duration: 0.5, ease: 'easeInOut'}} className="Popup Flex_center">
+                    <div className="Popup_content" style={{ width: variant === "Large" ? "70%" : "35%", height: variant === "Large" ? "70%" : "35%" }}>
                         {content}
                     </div>
                 </motion.div>

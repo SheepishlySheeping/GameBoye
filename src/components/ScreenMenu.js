@@ -14,17 +14,17 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setPopupState, gameTot
 
     const popupContents = [
         <>
-            <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="ExitButton buttonHover">X</button>
-            <img src={cursorPNG} style={{ width: "50%", height: "30%", marginTop: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }} alt="CursorPNG"></img>
-            <img src={cursorclickPNG} style={{ width: "50%", height: "30%", marginTop: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center', objectFit: 'contain' }} alt="CursorClickPNG"></img>
-            <p style={{ width: "45%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Normal</p>
-            <p style={{ width: "55%", height: "5%", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Interactable</p>
-            <p style={{ width: "100%", height: "10%", display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '1.5rem' }}>Earn Points To Unlock Games!</p>
+            <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="Exit_button buttonHover">X</button>
+            <img className="Flex_center" src={cursorPNG} style={{ width: "50%", height: "30%", marginTop: "5%", objectFit: 'contain' }} alt="CursorPNG"></img>
+            <img className="Flex_center" src={cursorclickPNG} style={{ width: "50%", height: "30%", marginTop: "5%", objectFit: 'contain' }} alt="CursorClickPNG"></img>
+            <p style={{ width: "45%", height: "5%", textAlign: "center", fontSize: "2rem" }}>Normal</p>
+            <p style={{ width: "55%", height: "5%", textAlign: "center", fontSize: "2rem" }}>Interactable</p>
+            <p style={{ width: "100%", height: "10%", textAlign: "center", fontSize: "3rem" }}>Earn Points To Unlock Games!</p>
             <div style={{ width: "80%", height: "1.5%", backgroundColor: 'black', margin: '0 10%' }}></div>
-            <p style={{ width: "90%", height: "44.5%", margin: '2.5% 5%' }}>Created by Sheep</p>
+            <p style={{ width: "90%", height: "44.5%", margin: '2.5% 5%', fontSize: "2rem" }}>Created by Sheep</p>
         </>,
         <>
-            <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="ExitButton buttonHover">X</button>
+            <button onClick={() => setPopupState({ variant: "Off", content: "", duration: 0 })} className="Exit_button buttonHover">X</button>
             <button style={{ width: "100%", height: "5%", marginTop: "5%" }} onClick={() => setVisualEffect({ variant: "HorizontalGlitch", duration: 3000 })}>Glitch me</button>
             <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading1", duration: 3000 })}>Load 1</button>
             <button style={{ width: "33%", height: "5%" }} onClick={() => setVisualEffect({ variant: "Loading2", duration: 3000 })}>Load 2</button>
