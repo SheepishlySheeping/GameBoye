@@ -87,7 +87,7 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setPopupState, gameTot
     return (
         <>
             <div style={{ zIndex: 1, width: "100%", height: "100%" }}>
-                <div className="menuTitleHolder sway"><AnimateString text={gameTotalScore < slides[currentSlide].reqScore ? ("Score " + slides[currentSlide].reqScore + " To Unlock") : (slides[currentSlide].title)} ></AnimateString></div>
+                <div className="Menu_title_holder Flex_center sway"><AnimateString text={gameTotalScore < slides[currentSlide].reqScore ? ("Score " + slides[currentSlide].reqScore + " To Unlock") : (slides[currentSlide].title)} ></AnimateString></div>
                 <div className="menuSlideChangerHolder">
                     <button className="menuSlideChanger buttonHover" onClick={() => changeSlide("prev")} style={{ display: currentSlide === 0 ? "none" : "block", left: "10.8%" }}></button>
                     <button className="menuSlideChanger buttonHover" onClick={() => changeSlide("next")} style={{ display: currentSlide === slides.length - 1 ? "none" : "block", right: "10.2%" }}></button>
@@ -100,7 +100,7 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setPopupState, gameTot
                         </motion.button>
                     ))}
                 </motion.div>
-                <div className="menuScoreHolder sway">
+                <div className="Menu_score_holder Flex_center sway">
                     <AnimateScore scorePrev={gamePrevScore} score={gameTotalScore} setGamePrevScore={setGamePrevScore}></AnimateScore>
                 </div>
             </div>
