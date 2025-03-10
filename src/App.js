@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import './assets/styles/App.css';
 import AnimatedBackground from "./components/AnimatedBackground";
@@ -16,6 +16,7 @@ import tetrisPNG from './assets/imgs/tetrisPNG.png'
 
 const App = () => {
 
+  const [verticalScreen, setVerticalScreen] = useState(window.innerHeight > window.innerWidth);
   const [switchState, setSwitchState] = useState({ on: false, disabled: false });
   const [clickBlocked, setClickBlocked] = useState(false);
   const [gameState, setGameState] = useState("gameMenu");
@@ -34,6 +35,15 @@ const App = () => {
   ]);
 
   const timeout = useRef(null);
+
+  useEffect(() => {
+  window.addEventListener("resize", () => {
+    if (window.innerHeight > window.innerWidth) {
+      setVerticalScreen(true);
+    } else {
+      setVerticalScreen(false);
+    }})
+  }, [])
 
   const handleSwitch = () => {
 
@@ -88,7 +98,7 @@ const App = () => {
         </AnimatePresence>
         {gameState !== "gameBootUp" && gameState !== "gameOff" && <AnimatedBackground gameState={gameState} />}
         {gameState === "gameBootUp" && <ScreenBootUp changeScreen={changeScreen} />}
-        {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setVisualEffect={setVisualEffect} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} blockScreen={blockScreen} changeScreen={changeScreen} />}
+        {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setVisualEffect={setVisualEffect} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} blockScreen={blockScreen} changeScreen={changeScreen} verticalScreen={verticalScreen} />}
         {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState} blockScreen={blockScreen} changeScreen={changeScreen} />}
       </div>
 

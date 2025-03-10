@@ -261,7 +261,7 @@ p {
   font-size: 7rem;
 }
 
-.menuSlidesHolder {
+.Menu_slide_holder {
   position: relative;
   display: flex;
   align-items: center;
@@ -346,4 +346,8 @@ p {
   width: 50%;
   height: 10%;
   background-color: blue;
+}
+
+@media (orientation: portrait) {
+  
 }
