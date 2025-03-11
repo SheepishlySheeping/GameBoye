@@ -348,6 +348,11 @@ p {
   background-color: blue;
 }
 
-@media (orientation: portrait) {
-  
+@media (orientation: landscape) {
+  .Bootup_squares {
+    height: 15vmin;
+    width: 15vmin;
+    margin: 0 1vmin;
+    font-size: 15rem;
+  }
 }
