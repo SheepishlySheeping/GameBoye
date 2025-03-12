@@ -262,14 +262,23 @@ p {
 }
 
 .Menu_slide_holder {
+  height: 70%;
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
   left: 32.33vw;
-  width: 100%;
-  height: 70%;
   white-space: nowrap;
-  align-items: center;
+  background-color: red;
+}
+
+.Menu_slide {
+  height: 40vmax;
+  width: 40vmax;
+  position: relative;
+  margin: 0 0.5vmax;
+  flex-shrink: 0;
+  background-blend-mode: multiply;
 }
 
 .menuSlideChangerHolder {
@@ -288,14 +297,7 @@ p {
   height: 13vw;
 }
 
-.menuSlide {
-  flex-shrink: 0;
-  position: relative;
-  width: 25vw;
-  height: 25vw;
-  margin: 0 3vw;
-  background-blend-mode: multiply;
-}
+
 
 .menuSlide div {
   width: 100%;
@@ -349,10 +351,9 @@ p {
 }
 
 @media (orientation: landscape) {
-  .Bootup_squares {
-    height: 15vmin;
-    width: 15vmin;
-    margin: 0 1vmin;
-    font-size: 15rem;
+  .Menu_slide {
+    height: 25vmax;
+    width: 25vmax;
+    margin: 0 3vmax;
   }
 }

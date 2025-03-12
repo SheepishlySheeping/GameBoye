@@ -16,7 +16,7 @@ import tetrisPNG from './assets/imgs/tetrisPNG.png'
 
 const App = () => {
 
-  const [verticalScreen, setVerticalScreen] = useState(window.innerHeight > window.innerWidth);
+  const [horizontalScreen, setHorizontalScreen] = useState(window.innerHeight < window.innerWidth);
   const [switchState, setSwitchState] = useState({ on: false, disabled: false });
   const [clickBlocked, setClickBlocked] = useState(false);
   const [gameState, setGameState] = useState("gameMenu");
@@ -39,9 +39,9 @@ const App = () => {
   useEffect(() => {
   window.addEventListener("resize", () => {
     if (window.innerHeight > window.innerWidth) {
-      setVerticalScreen(true);
+      setHorizontalScreen(true);
     } else {
-      setVerticalScreen(false);
+      setHorizontalScreen(false);
     }})
   }, [])
 
@@ -98,7 +98,7 @@ const App = () => {
         </AnimatePresence>
         {gameState !== "gameBootUp" && gameState !== "gameOff" && <AnimatedBackground gameState={gameState} />}
         {gameState === "gameBootUp" && <ScreenBootUp changeScreen={changeScreen} />}
-        {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setVisualEffect={setVisualEffect} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} blockScreen={blockScreen} changeScreen={changeScreen} verticalScreen={verticalScreen} />}
+        {gameState === "gameMenu" && <ScreenMenu slides={slides} setSlides={setSlides} setVisualEffect={setVisualEffect} setPopupState={setPopupState} gameTotalScore={gameTotalScore} setGameTotalScore={setGameTotalScore} gamePrevScore={gamePrevScore} setGamePrevScore={setGamePrevScore} blockScreen={blockScreen} changeScreen={changeScreen} horizontalScreen={horizontalScreen} />}
         {gameState === "gameTicTacToe" && <ScreenTicTacToe setGameState={setGameState} blockScreen={blockScreen} changeScreen={changeScreen} />}
       </div>
 

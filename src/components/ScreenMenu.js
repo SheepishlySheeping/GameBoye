@@ -7,7 +7,7 @@ import cursorPNG from '../assets/imgs/cursorPNG.png'
 import cursorclickPNG from '../assets/imgs/cursorclickPNG.png'
 import lockPNG from '../assets/imgs/lockPNG.png'
 
-const ScreenMenu = ({ slides, setSlides, setVisualEffect, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore, blockScreen, changeScreen, verticalScreen }) => {
+const ScreenMenu = ({ slides, setSlides, setVisualEffect, setPopupState, gameTotalScore, setGameTotalScore, gamePrevScore, setGamePrevScore, blockScreen, changeScreen, horizontalScreen }) => {
 
     const [currentSlide, setCurrentSlide] = useState(1);
     const timeouts = useRef([]);
@@ -92,9 +92,9 @@ const ScreenMenu = ({ slides, setSlides, setVisualEffect, setPopupState, gameTot
                     <button className="menuSlideChanger buttonHover" onClick={() => changeSlide("prev")} style={{ display: currentSlide === 0 ? "none" : "block", left: "10.8%" }}></button>
                     <button className="menuSlideChanger buttonHover" onClick={() => changeSlide("next")} style={{ display: currentSlide === slides.length - 1 ? "none" : "block", right: "10.2%" }}></button>
                 </div>
-                <motion.div className="Menu_slide_holder" initial={{ x: `-${currentSlide * 31}vw` }} animate={{ x: `-${currentSlide * 31}vw` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
+                <motion.div className="Menu_slide_holder" initial={{ x: horizontalScreen === true ? `-${currentSlide * 31}vmax` : `-${currentSlide * 15}vmax` }} animate={{ x: horizontalScreen === true ? `-${currentSlide * 31}vmax` : `-${currentSlide * 42}vmax` }} transition={{ duration: 0.5, ease: 'easeInOut' }} >
                     {slides.map(((slide, index) =>
-                        <motion.button key={index} onClick={() => menuClick(slide.id)} disabled={!slide.unlocked} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} className={`menuSlide buttonHover`} style={{ background: `url(${slide.icon}), radial-gradient(circle, rgba(0, 255, 255) 30%, rgba(0, 190, 255))`, backgroundSize: "cover" }} >
+                        <motion.button key={index} onClick={() => menuClick(slide.id)} disabled={!slide.unlocked} initial={false} animate={buttonAnimation(index)} transition={{ duration: 0.5, ease: 'easeInOut' }} className={`Menu_slide buttonHover`} style={{ background: `url(${slide.icon}), radial-gradient(circle, rgba(0, 255, 255) 30%, rgba(0, 190, 255))`, backgroundSize: "cover" }} >
                             <AnimatePresence mode="wait">{!slide.unlocked && <motion.div style={{ background: `url(${lockPNG}), radial-gradient(circle, rgba(150, 150, 150) 30%, rgba(100, 100, 100))`, backgroundSize: "cover" }}
                                 animation={{ scale: 1, opacity: 1 }} exit={{ scale: 1.3, opacity: 0 }} transition={{ delay: "0.5", duration: "2" }}></motion.div>}</AnimatePresence>
                         </motion.button>
